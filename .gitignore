@@ -1,0 +1,14 @@
+# Ignora i file compilati Java
+*.class
+/build/
+/WebContent/WEB-INF/classes/
+
+# Ignora configurazioni locali dell'IDE
+.settings/
+.project
+.classpath
+.vscode/
+
+# Ignora file di sistema operativo
+.DS_Store
+Thumbs.db
