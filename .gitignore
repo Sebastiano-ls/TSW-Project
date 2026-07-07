@@ -12,3 +12,6 @@
 # Ignora file di sistema operativo
 .DS_Store
 Thumbs.db
+
+# Ignora context.xml locale (ognuno ha le proprie credenziali)
+/WebContent/META-INF/context.xml
