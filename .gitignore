@@ -13,5 +13,8 @@
 .DS_Store
 Thumbs.db
 
-# Ignora context.xml locale (ognuno ha le proprie credenziali)
+# Ignora il context.xml locale (ognuno ha le proprie credenziali per testare il sito)
 /WebContent/META-INF/context.xml
+
+# Ignora librerie locali per la compilazione (non ci servono in produzione)
+/lib/
