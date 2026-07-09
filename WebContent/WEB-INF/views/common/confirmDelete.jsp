@@ -26,7 +26,7 @@
       <p>Sei sicuro di voler eliminare il tuo account?<br>
       Questa operazione è irreversibile e tutti i tuoi dati verranno cancellati.</p>
       <form action="${pageContext.request.contextPath}/account/delete" method="post">
-        <input type="hidden" name="id" value="<%= utente.getId() %>">
+        <input type="hidden" name="id" value="<%= utente.getIdUtente() %>">
         <div class="confirm-actions">
           <a href="javascript:history.back()" class="btn btn-outline">Annulla</a>
           <button type="submit" class="btn btn-danger">Elimina account</button>
