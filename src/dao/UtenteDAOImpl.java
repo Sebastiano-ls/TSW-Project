@@ -26,11 +26,11 @@ public class UtenteDAOImpl implements UtenteDAO {
         try (Connection connection = ds.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
 
-            //BINDING PARAMETRI PER PREVENIRE SQL INJECTION
+            // binding parametri per prevenire SQL injection
             preparedStatement.setString(1, utente.getNome());
             preparedStatement.setString(2, utente.getCognome());
             preparedStatement.setString(3, utente.getEmail());
-            preparedStatement.setString(4, utente.getPassword()); //PASSWORD GIA' CIFRATA IN SHA-512
+            preparedStatement.setString(4, utente.getPassword()); // password già cifrata in SHA-512
             preparedStatement.setString(5, utente.getGenere());
             preparedStatement.setDate(6, utente.getDataNascita());
             preparedStatement.setString(7, utente.getNumTelefono());
@@ -49,7 +49,7 @@ public class UtenteDAOImpl implements UtenteDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
 
             preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password); // HASH INSERITO DALL'UTENTE PER VERIFICARNE L'INTEGRITÀ
+            preparedStatement.setString(2, password); // hash inserito dall'utente per verificarne l'integrità
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
                     bean = new UtenteBean();
@@ -65,7 +65,7 @@ public class UtenteDAOImpl implements UtenteDAO {
                 }
             }
         }
-        return bean; //SE LE CREDENZIALI NON COINCIDONO, RITORNA NULL
+        return bean; // se le credenziali non coincidono, ritorna null
     }
 
     @Override

@@ -55,8 +55,13 @@ public class ProfileServlet extends HttpServlet {
         try {
             if ("updateInfo".equals(action)) {
                 updateInfo(request, utente);
+                request.getSession().setAttribute("success", "Dati aggiornati con successo.");
             } else if ("updatePassword".equals(action)) {
-                updatePassword(request, utente);
+                if (!updatePassword(request, utente)) {
+                    request.getSession().setAttribute("error", "Password attuale errata.");
+                } else {
+                    request.getSession().setAttribute("success", "Password aggiornata con successo.");
+                }
             }
         } catch (SQLException e) {
             throw new ServletException(e);
@@ -84,23 +89,24 @@ public class ProfileServlet extends HttpServlet {
         request.getSession().setAttribute("utente", utente);
     }
 
-    private void updatePassword(HttpServletRequest request, UtenteBean utente) throws SQLException {
+    private boolean updatePassword(HttpServletRequest request, UtenteBean utente) throws SQLException {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
 
         if (oldPassword == null || newPassword == null ||
             oldPassword.trim().isEmpty() || newPassword.trim().isEmpty()) {
-            return;
+            return false;
         }
 
         String oldHash = SecurityUtils.toDigest(oldPassword);
         if (!oldHash.equals(utente.getPassword())) {
-            return;
+            return false;
         }
 
         String newHash = SecurityUtils.toDigest(newPassword);
         utenteDAO.doUpdatePassword(utente.getIdUtente(), newHash);
         utente.setPassword(newHash);
         request.getSession().setAttribute("utente", utente);
+        return true;
     }
 }

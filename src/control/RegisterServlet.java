@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
             cognome == null || cognome.trim().isEmpty() ||
             email == null || email.trim().isEmpty() ||
             password == null || password.trim().isEmpty()) {
-            request.setAttribute("ERRORE", "TUTTI I CAMPI OBBLIGATORI DEVONO ESSERE COMPILATI!");
+            request.setAttribute("error", "Tutti i campi obbligatori devono essere compilati.");
             doGet(request, response);
             return;
         }
@@ -72,7 +72,7 @@ public class RegisterServlet extends HttpServlet {
             utenteDAO.doSave(utente);
             response.sendRedirect(request.getContextPath() + "/login");
         } catch (SQLException e) {
-            request.setAttribute("ERRORE", "E' GIÀ PRESENTE UN ACCOUNT");
+            request.setAttribute("error", "Email già registrata.");
             doGet(request, response);
         }
     }
