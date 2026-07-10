@@ -6,7 +6,7 @@
         </head>
         <body>
             <!-- Intestazione della pagina -->
-            <img href="..\WebContent\images\S&S_Cruises_Logo.jpeg">
+            <img src="images/S&S_Cruises_Logo.jpeg" alt="Logo not found" width="150" height="100">
             <a href="#prenotazione">PRENOTA ORA</a>
             <a href="">PACCHETTI</a>
             <a href="">LE MIE CROCIERE</a>
@@ -15,7 +15,7 @@
             <!-- Foto che andrà al di sotto della prenotazione (al momento è mancante)-->
 
             <!-- Field della prenotazione -->
-             <form>
+             <form id="prenotazione" action="" method="post">
                 <fieldset>
                     <legend>Prenota la tua crociera:</legend>
                     <label for="des">Dove?</label>
@@ -35,6 +35,8 @@
 
                     <label for="childs">Quanti minorenni?</label>
                     <input type="number" name="childs" id="childs" value="" min="0" max="3">
+
+                    <input type="submit" value="CERCA">
                 </fieldset>
              </form>
 
@@ -43,6 +45,6 @@
               <a href="" id="consulenza"> <img src="" alt="PARLA CON NOI"> </a>
               <a href="" id="le_migliori"> <img src="" alt="MIGLIORI RECENSIONI"> </a>
 
-            <!-- Footer della pagina (lo faremo dopo unicamente)-->
+            <!-- Footer della pagina (lo faremo dopo unicamente) -->
         </body>
     </html>
