@@ -12,9 +12,37 @@
             <a href="">LE MIE CROCIERE</a>
             <a href="">LOGIN</a>
 
-            <!-- Field della prnotazione -->
-            <input type="">
+            <!-- Foto che andrà al di sotto della prenotazione (al momento è mancante)-->
 
-            <!-- Footer della pagina-->
+            <!-- Field della prenotazione -->
+             <form>
+                <fieldset>
+                    <legend>Prenota la tua crociera:</legend>
+                    <label for="des">Dove?</label>
+                    <input type="text" name="des" id="des" placeholder="destinazione" value="">
+
+                    <label for="par">Da quale porto?</label>
+                    <input type="text" name="par" id="par" placeholder="porto di partenza" value="">
+
+                    <label for="comp">Compagnia?</label>
+                    <input type="text" name="comp" id="comp" placeholder="compagnia" value="">
+
+                    <label for="data">Quando?</label>
+                    <input type="date" name="data" id="data" value="">
+
+                    <label for="adults">Quanti adulti?</label>
+                    <input type="number" name="adults" id="adults" value="" min="1" max="4">
+
+                    <label for="childs">Quanti minorenni?</label>
+                    <input type="number" name="childs" id="childs" value="" min="0" max="3">
+                </fieldset>
+             </form>
+
+             <!-- Chiamate a ricerche predefoinite -->
+              <a href="" id="prezzi_bassi"> <img src="" alt="PREZZI PIU BASSI"> </a>
+              <a href="" id="consulenza"> <img src="" alt="PARLA CON NOI"> </a>
+              <a href="" id="le_migliori"> <img src="" alt="MIGLIORI RECENSIONI"> </a>
+
+            <!-- Footer della pagina (lo faremo dopo unicamente)-->
         </body>
     </html>
