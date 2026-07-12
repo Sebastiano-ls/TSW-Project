@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,36 +29,21 @@ public class RicercaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //PRENDO I PARAMETRI DEL FORM DALLA RICHIESTA
-		String des = (request.getParameter("des") != "") ? request.getParameter("des") : null;
-        String par = (request.getParameter("par") != "") ? request.getParameter("par") : null;
-        String comp = (request.getParameter("comp") != "") ? request.getParameter("comp") : null;
-        LocalDate data = (request.getParameter("data") != "") ? LocalDate.parse(request.getParameter("data")) : null;
-        int adu = (request.getParameter("adults") != "") ? Integer.parseInt(request.getParameter("adults")) : null;
-        int childs = (request.getParameter("childs") != "") ? Integer.parseInt(request.getParameter("childs")) : null;
+		String des = (!request.getParameter("des").equals("")) ? request.getParameter("des") : null;
+        String par = (!request.getParameter("par").equals("")) ? request.getParameter("par") : null;
+        String comp = (!request.getParameter("comp").equals("")) ? request.getParameter("comp") : null;
+        LocalDate data = (!request.getParameter("data").equals(null) && !request.getParameter("data").equals("")) ? LocalDate.parse(request.getParameter("data")) : null;
+        int adu = Integer.parseInt(request.getParameter("adults"));
+        int childs = Integer.parseInt(request.getParameter("childs"));
 
         //CHIAMO IL JAVABEAN
         RicercatoreBean ricercatore = new RicercatoreBean();
         List<Crociera> risultati = ricercatore.getCruises(des, par, comp, data, adu, childs);
 
-        //IMPOSTO L'HEADING CONTENTTYPE DI TIPO HTML
-        response.setContentType ("text/html");
 
-        //CREO LA PAGINA DI RISPOSTA
-		PrintWriter writer = response.getWriter();
-		writer.println("<!DOCTYPE html>");
-		writer.println("<html><body>");
-		writer.println("<h1>RISULTATI IN MERITO ALLA TUA SELEZIONE:</h1>");
-		writer.println(" Destinazione: " + des);
-        writer.println(" Porto di partenza: " + par);
-        writer.println(" Compagnia: " + comp);
-        writer.println(" Data di partenza: " + data);
-        writer.println(" Numero di adulti: " + adu);
-        writer.println(" Numero di bambini: " + childs);
-
-        for(Crociera c : risultati){
-            writer.println("<br>" + c);
-        }
-
-		writer.println("</html></body>");
+        //AGGIUNGO I RIUSLTATI NELLA RICHIESTA E LA INOLTRO ALLA JSP
+        request.setAttribute("risultati", risultati);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/risultati.jsp");
+        dispatcher.forward(request, response);
 	}
 }
