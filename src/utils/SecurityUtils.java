@@ -6,6 +6,19 @@ import java.security.NoSuchAlgorithmException;
 
 public class SecurityUtils {
 
+    /**
+     * escapa i caratteri speciali html per prevenire xss nelle jsp.
+     * da usare su tutti i valori utente stampati con <%= %>
+     */
+    public static String escapeHtml(String s) {
+        if (s == null) return "";
+        return s.replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#x27;");
+    }
+
     public static String toDigest(String password) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
