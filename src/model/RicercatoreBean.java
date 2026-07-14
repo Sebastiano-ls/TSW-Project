@@ -8,11 +8,11 @@ public class RicercatoreBean{
     public RicercatoreBean(){
     }
 
-    public List<Crociera> getCruises(String destinazione, String partenza, String compagnia, LocalDate d, int adults, int c){
-        List<Crociera> risultati = new ArrayList<Crociera>();
+    public List<CrocieraBean> getCruises(String destinazione, String partenza, String compagnia, LocalDate d, int adults, int c){
+        List<CrocieraBean> risultati = new ArrayList<CrocieraBean>();
 
-        risultati.add(new Crociera(destinazione, partenza, compagnia, d, adults, c));
-        risultati.add(new Crociera(destinazione, partenza, compagnia, d, adults, c));
+        risultati.add(new CrocieraBean(destinazione, partenza, compagnia, d, adults, c));
+        risultati.add(new CrocieraBean(destinazione, partenza, compagnia, d, adults, c));
 
         return risultati;
     }

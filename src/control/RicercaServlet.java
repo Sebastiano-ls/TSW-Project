@@ -12,7 +12,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 import model.RicercatoreBean;
-import model.Crociera;
+import model.CrocieraBean;
 
 @WebServlet("/RicercaServlet")
 public class RicercaServlet extends HttpServlet {
@@ -29,16 +29,16 @@ public class RicercaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         //PRENDO I PARAMETRI DEL FORM DALLA RICHIESTA
-		String des = (!request.getParameter("des").equals("")) ? request.getParameter("des") : null;
-        String par = (!request.getParameter("par").equals("")) ? request.getParameter("par") : null;
-        String comp = (!request.getParameter("comp").equals("")) ? request.getParameter("comp") : null;
+		String des = (!request.getParameter("des").trim().isEmpty()) ? request.getParameter("des").trim() : null;
+        String par = (!request.getParameter("par").trim().isEmpty()) ? request.getParameter("par").trim() : null;
+        String comp = (!request.getParameter("comp").trim().isEmpty()) ? request.getParameter("comp").trim() : null;
         LocalDate data = (!request.getParameter("data").equals(null) && !request.getParameter("data").equals("")) ? LocalDate.parse(request.getParameter("data")) : null;
         int adu = Integer.parseInt(request.getParameter("adults"));
         int childs = Integer.parseInt(request.getParameter("childs"));
 
         //CHIAMO IL JAVABEAN
         RicercatoreBean ricercatore = new RicercatoreBean();
-        List<Crociera> risultati = ricercatore.getCruises(des, par, comp, data, adu, childs);
+        List<CrocieraBean> risultati = ricercatore.getCruises(des, par, comp, data, adu, childs);
 
 
         //AGGIUNGO I RIUSLTATI NELLA RICHIESTA E LA INOLTRO ALLA JSP
