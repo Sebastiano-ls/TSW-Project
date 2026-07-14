@@ -25,6 +25,8 @@ CREATE TABLE crociera (
     data_fine DATE NOT NULL,
     prezzo DECIMAL(10,2) NOT NULL,
     sconto DECIMAL(5,2) DEFAULT 0.00,
+    immagine_crociera MEDIUMBLOB NULL,
+    immagine_tipo VARCHAR(50) NULL,
     attivo BOOLEAN DEFAULT TRUE
 );
 
