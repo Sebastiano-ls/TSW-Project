@@ -39,7 +39,13 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
-        String password = SecurityUtils.toDigest(request.getParameter("password"));
+        String passwordParam = request.getParameter("password");
+        if (email == null || email.trim().isEmpty() || passwordParam == null || passwordParam.isEmpty()) {
+            request.setAttribute("error", "email e password sono obbligatorie");
+            doGet(request, response);
+            return;
+        }
+        String password = SecurityUtils.toDigest(passwordParam);
 
         try {
             UtenteBean utente = utenteDAO.doRetrieveByEmailAndPassword(email, password);
