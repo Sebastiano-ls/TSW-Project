@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RicercatoreBean{
+public class RicercatoreBean implements Serializable{
     public RicercatoreBean(){
     }
 

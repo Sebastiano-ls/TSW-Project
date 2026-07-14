@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Crociera {
+public class CrocieraBean implements Serializable{
     private String des;
     private String par;
     private String comp;
@@ -10,7 +11,7 @@ public class Crociera {
     private int adu;
     private int childs;
 
-    public Crociera(String destinazione, String partenza, String compagnia, LocalDate d, int adults, int c){
+    public CrocieraBean(String destinazione, String partenza, String compagnia, LocalDate d, int adults, int c){
         des = destinazione;
         par = partenza;
         comp = compagnia;
