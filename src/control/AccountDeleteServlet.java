@@ -51,14 +51,22 @@ public class AccountDeleteServlet extends HttpServlet {
 
         try {
             String idParam = request.getParameter("id");
-            int targetId = (idParam != null) ? Integer.parseInt(idParam) : sessionUser.getIdUtente();
+            int targetId;
+            try {
+                targetId = (idParam != null) ? Integer.parseInt(idParam) : sessionUser.getIdUtente();
+            } catch (NumberFormatException e) {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+                return;
+            }
 
-            if (sessionUser.getRuolo().equals("admin") || targetId == sessionUser.getIdUtente()) {
+            if ("admin".equals(sessionUser.getRuolo()) || targetId == sessionUser.getIdUtente()) {
                 utenteDAO.doDelete(targetId);
                 if (targetId == sessionUser.getIdUtente()) {
                     request.getSession().invalidate();
+                    response.sendRedirect(request.getContextPath() + "/home");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/admin/utenti");
                 }
-                response.sendRedirect(request.getContextPath() + "/home");
             } else {
                 response.sendError(HttpServletResponse.SC_FORBIDDEN);
             }
