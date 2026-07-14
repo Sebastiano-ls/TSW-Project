@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -41,7 +43,7 @@ public class UtenteDAOImpl implements UtenteDAO {
     }
 
     @Override
-    public UtenteBean doRetrieveByEmailAndPassword(String email, String password) throws SQLException {
+    public synchronized UtenteBean doRetrieveByEmailAndPassword(String email, String password) throws SQLException {
         UtenteBean bean = null;
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE email = ? AND password = ?";
 
@@ -125,6 +127,30 @@ public class UtenteDAOImpl implements UtenteDAO {
             preparedStatement.setInt(1, idUtente);
             preparedStatement.executeUpdate();
         }
+    }
+
+    @Override
+    public synchronized List<UtenteBean> doRetrieveAll() throws SQLException {
+        List<UtenteBean> lista = new ArrayList<>();
+        String sql = "SELECT * FROM " + TABLE_NAME + " ORDER BY ID_utente";
+        try (Connection c = ds.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                UtenteBean bean = new UtenteBean();
+                bean.setIdUtente(rs.getInt("ID_utente"));
+                bean.setNome(rs.getString("nome"));
+                bean.setCognome(rs.getString("cognome"));
+                bean.setEmail(rs.getString("email"));
+                bean.setPassword(rs.getString("password"));
+                bean.setGenere(rs.getString("genere"));
+                bean.setDataNascita(rs.getDate("data_nascita"));
+                bean.setNumTelefono(rs.getString("num_telefono"));
+                bean.setRuolo(rs.getString("ruolo"));
+                lista.add(bean);
+            }
+        }
+        return lista;
     }
 
     @Override
