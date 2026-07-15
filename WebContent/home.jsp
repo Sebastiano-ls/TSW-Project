@@ -6,16 +6,12 @@
         </head>
         <body>
             <!-- Intestazione della pagina -->
-            <img src="images/S&S_Cruises_Logo.jpeg" alt="Logo not found" width="150" height="100">
-            <a href="#prenotazione">PRENOTA ORA</a>
-            <a href="">PACCHETTI</a>
-            <a href="">LE MIE CROCIERE</a>
-            <a href="">LOGIN</a>
+            <jsp include url="${pageContext.request.contextPath}/header">
 
             <!-- Foto che andrà al di sotto della prenotazione (al momento è mancante)-->
 
             <!-- Field della prenotazione -->
-             <form id="prenotazione" action="/TSW-Project/RicercaServlet" method="post">
+             <form id="ricerca" action="/TSW-Project/RicercaServlet" method="post">
                 <fieldset>
                     <legend>Prenota la tua crociera</legend>
                     <label for="des">Dove?</label>
@@ -40,11 +36,12 @@
                 </fieldset>
              </form>
 
-             <!-- Chiamate a ricerche predefoinite -->
-              <a href="" id="prezzi_bassi"> <img src="" alt="PREZZI PIU BASSI"> </a>
-              <a href="" id="consulenza"> <img src="" alt="PARLA CON NOI"> </a>
-              <a href="" id="le_migliori"> <img src="" alt="MIGLIORI RECENSIONI"> </a>
+             <!-- Chiamate a ricerche predefinite -->
+              <a href="${pageContext.request.contextPath}/ricerca?ricerca=prezzi_bassi" id="prezzi_bassi"> <img src="" alt="PREZZI PIU BASSI"> </a>
+              <a href="${pageContext.request.contextPath}/supporto" id="consulenza"> <img src="" alt="PARLA CON NOI"> </a>
+              <a href="${pageContext.request.contextPath}/ricerca?ricerca=best_val" id="le_migliori"> <img src="" alt="MIGLIORI RECENSIONI"> </a>
 
-            <!-- Footer della pagina (lo faremo dopo unicamente) -->
+            <!-- Footer della pagina -->
+            <jsp include url="${pageContext.request.contextPath}/footer">
         </body>
     </html>
