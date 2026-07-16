@@ -1,76 +1,100 @@
 package model;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class CrocieraBean implements Serializable{
+    private int id;
+    private String nome;
     private String des;
-    private String par;
-    private String comp;
-    private LocalDate data;
-    private int adu;
-    private int childs;
+    private Date dataIn;
+    private Date dataFin;
+    private int prezzo;
+    private int sconto;
+    private byte[] immagineCrociera;
+    private String immagineTipo;
+    private boolean attivo;
 
-    public CrocieraBean(String destinazione, String partenza, String compagnia, LocalDate d, int adults, int c){
-        des = destinazione;
-        par = partenza;
-        comp = compagnia;
-        data = d;
-        adu = adults;
-        childs = c;
+    public CrocieraBean(){
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDes() {
         return des;
     }
 
-    public String getPar() {
-        return par;
-    }
-
-    public String getComp() {
-        return comp;
-    }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public int getAdu() {
-        return adu;
-    }
-
-    public int getChilds() {
-        return childs;
-    }
-
     public void setDes(String des) {
         this.des = des;
     }
-    
-    public void setPar(String par) {
-        this.par = par;
+
+    public Date getDataInizio() {
+        return dataIn;
     }
 
-    public void setComp(String comp) {
-        this.comp = comp;
+    public void setDataInizio(Date dataIn) {
+        this.dataIn = dataIn;
     }
 
-    public void setData(LocalDate data) {
-        this.data = data;
+    public Date getDataFine() {
+        return dataFin;
     }
 
-    public void setAdu(int adu) {
-        this.adu = adu;
+    public void setDataFine(Date dataFin) {
+        this.dataFin = dataFin;
     }
 
-    public void setChilds(int childs) {
-        this.childs = childs;
+    public int getPrezzo() {
+        return prezzo;
     }
 
-    @Override
-    public String toString() {
-        return "Crociera [des=" + des + ", par=" + par + ", comp=" + comp + ", data=" + data + ", adu=" + adu
-                + ", childs=" + childs + "]";
+    public void setPrezzo(int prezzo) {
+        this.prezzo = prezzo;
+    }
+
+    public int getSconto() {
+        return sconto;
+    }
+
+    public void setSconto(int sconto) {
+        this.sconto = sconto;
+    }
+
+    public byte[] getImmagineCrociera() {
+        return immagineCrociera;
+    }
+
+    public void setImmagineCrociera(byte[] immagineCrociera) {
+        this.immagineCrociera = immagineCrociera;
+    }
+
+    public String getMimeType() {
+        return immagineTipo;
+    }
+
+    public void setMimeType(String immagineTipo) {
+        this.immagineTipo = immagineTipo;
+    }
+
+    public boolean isAttivo() {
+        return attivo;
+    }
+
+    public void setAttivo(boolean attivo) {
+        this.attivo = attivo;
     }
 }

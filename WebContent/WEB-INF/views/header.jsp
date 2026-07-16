@@ -8,7 +8,7 @@
     <ul class="navbar-nav">
       <li><a href="${pageContext.request.contextPath}/home" class="nav-link">Home</a></li>
       <li><a href="${pageContext.request.contextPath}/home#ricerca" class="nav-link">Prenota ora</a></li>
-      <li><a href="${pageContext.request.contextPath}/ricerca?ricerca=più_recenti" class="nav-link">Catalogo</a></li>
+      <li><a href="${pageContext.request.contextPath}/ricerca?action=recenti" class="nav-link">Catalogo</a></li>
       <li><a href="${pageContext.request.contextPath}/carrello" class="nav-link">Carrello</a></li>
 <% if (utenteLoggato == null) { %>
       <li class="dropdown">
