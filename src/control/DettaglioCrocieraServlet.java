@@ -11,7 +11,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
-@WebServlet("/dettaglio")
+@WebServlet("/common/dettaglio")
 public class DettaglioCrocieraServlet {
     
 }

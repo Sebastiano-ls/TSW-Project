@@ -140,7 +140,7 @@ public class CrocieraDAOImpl implements CrocieraDAO{
 
     public synchronized List<CrocieraBean> doRetrieveByParams(String destinazione, String partenza, Date dataIn) throws SQLException{
         ArrayList<CrocieraBean> risultati = new ArrayList<>();
-        String sql="SELECT DISTINCT c.* FROM " + TABLE_NAME + " c " +  "LEFT JOIN attraversa a ON c.ID_crociera = a.ID_crociera " + "LEFT JOIN tappa t ON a.ID_tappa = t.ID_tappa " + "WHERE c.attivo = TRUE";
+        String sql="SELECT DISTINCT c.* FROM " + TABLE_NAME + " c " +  "LEFT JOIN attraversa a ON c.ID_crociera = a.ID_crociera " + "LEFT JOIN tappa t ON a.ID_tappa = t.ID_tappa " + "WHERE c.attivo = TRUE ORDER BY c.data_inizio DESC";
 
         //VERIFICO QUALI PARAMETRI USARE PER LA RICERCA
         List<Object> parametri = new ArrayList<>();

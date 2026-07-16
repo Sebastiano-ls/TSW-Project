@@ -1,6 +1,6 @@
 import jakarta.servlet.annotation.WebServlet;
 
-@WebServlet("/carrello")
+@WebServlet("/common/carrello")
 public class CarrelloServlet {
     
 }
