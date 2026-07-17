@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("utente", utente);
                 response.sendRedirect(request.getContextPath() + "/home");
             } else {
-                request.setAttribute("error", "Email o password errate");
+                request.setAttribute("error", "email o password errate");
                 doGet(request, response);
             }
         } catch (SQLException e) {
