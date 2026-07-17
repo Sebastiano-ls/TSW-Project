@@ -5,6 +5,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import org.apache.commons.text.StringEscapeUtils;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Date;
@@ -39,9 +41,13 @@ public class RicercaServlet extends HttpServlet {
         String action = request.getParameter("action");
         if(action.equalsIgnoreCase("ricerca")){
             //PRENDO I PARAMETRI DEL FORM DALLA RICHIESTA
-            String des = (!request.getParameter("des").trim().isEmpty()) ? request.getParameter("des").trim() : null;
-            String par = (!request.getParameter("par").trim().isEmpty()) ? request.getParameter("par").trim() : null;
-            Date data = (!request.getParameter("data").equals(null) && !request.getParameter("data").equals("")) ? Date.valueOf(LocalDate.parse(request.getParameter("data"))) : null;
+            String des = request.getParameter("des");
+            String par = request.getParameter("par");
+            Date data = Date.valueOf(LocalDate.parse(request.getParameter("data")));
+            
+            des = (!des.trim().isEmpty()) ? StringEscapeUtils.escapeHtml4(des.trim()) : null;
+            par = (!par.trim().isEmpty()) ? StringEscapeUtils.escapeHtml4(par.trim()) : null;
+            data = (!request.getParameter("data").equals(null) && !request.getParameter("data").equals("")) ? Date.valueOf(LocalDate.parse(request.getParameter("data"))) : null;
             
             //CHIAMO IL DAO
             try{
