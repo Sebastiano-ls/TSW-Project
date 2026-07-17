@@ -25,7 +25,7 @@ public class RegisterServlet extends HttpServlet {
     public void init() throws ServletException {
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
         if (ds == null) {
-            throw new ServletException("DataSource NON DISPONIBILE");
+            throw new ServletException("datasource non disponibile");
         }
         utenteDAO = new UtenteDAOImpl(ds);
     }
@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
             cognome == null || cognome.trim().isEmpty() ||
             email == null || email.trim().isEmpty() ||
             password == null || password.trim().isEmpty()) {
-            request.setAttribute("error", "Tutti i campi obbligatori devono essere compilati.");
+            request.setAttribute("error", "tutti i campi obbligatori devono essere compilati");
             doGet(request, response);
             return;
         }
