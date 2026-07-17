@@ -55,12 +55,12 @@ public class ProfileServlet extends HttpServlet {
         try {
             if ("updateInfo".equals(action)) {
                 updateInfo(request, utente);
-                request.getSession().setAttribute("success", "Dati aggiornati con successo.");
+                request.getSession().setAttribute("success", "dati aggiornati con successo");
             } else if ("updatePassword".equals(action)) {
                 if (!updatePassword(request, utente)) {
-                    request.getSession().setAttribute("error", "Password attuale errata.");
+                    request.getSession().setAttribute("error", "password attuale errata");
                 } else {
-                    request.getSession().setAttribute("success", "Password aggiornata con successo.");
+                    request.getSession().setAttribute("success", "password aggiornata con successo");
                 }
             }
         } catch (SQLException e) {
