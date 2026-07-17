@@ -49,6 +49,15 @@
         </user-data-constraint>
     </security-constraint>
 
+    <error-page>
+        <location>/WEB-INF/views/error.jsp</location> <!-- Sostituisci con il percorso reale della tua pagina d'errore -->
+    </error-page>
+
+    <error-page>
+        <exception-type>java.lang.Throwable</exception-type>
+        <location>/WEB-INF/views/error.jsp</location>
+    </error-page>
+
     <resource-ref>
         <res-ref-name>jdbc/sscrociere</res-ref-name>
         <res-type>javax.sql.DataSource</res-type>
