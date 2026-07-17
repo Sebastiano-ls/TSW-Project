@@ -3,21 +3,7 @@ package utils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
 public class SecurityUtils {
-
-    /**
-     * escapa i caratteri speciali html per prevenire xss nelle jsp.
-     * da usare su tutti i valori utente stampati con <%= %>
-     */
-    public static String escapeHtml(String s) {
-        if (s == null) return "";
-        return s.replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;")
-                .replace("\"", "&quot;")
-                .replace("'", "&#x27;");
-    }
 
     public static String toDigest(String password) {
         try {
@@ -29,7 +15,7 @@ public class SecurityUtils {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Algoritmo SHA-512 non disponibile", e);
+            throw new RuntimeException("SHA-512 non disponibile", e);
         }
     }
 
