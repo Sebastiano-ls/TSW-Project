@@ -17,7 +17,7 @@ import dao.CrocieraDAO;
 import dao.CrocieraDAOImpl;
 import model.CrocieraBean;
 
-@WebServlet("/common/ricerca")
+@WebServlet("/ricerca")
 public class RicercaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private CrocieraDAO crocieraDAO;

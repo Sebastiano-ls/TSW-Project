@@ -37,10 +37,10 @@
 
              <!--Crociere last minute -->
 
+
              <!-- Chiamate a ricerche predefinite -->
               <a href="${pageContext.request.contextPath}/ricerca?action=prezzi_bassi" id="prezzi_bassi"> <img src="" alt="PREZZI PIU BASSI"> </a>
               <a href="${pageContext.request.contextPath}/supporto" id="consulenza"> <img src="" alt="PARLA CON NOI"> </a>
-              <a href="${pageContext.request.contextPath}/ricerca?action=best_val" id="le_migliori"> <img src="" alt="MIGLIORI RECENSIONI"> </a>
 
             <!-- Footer della pagina -->
             <jsp include url="${pageContext.request.contextPath}/footer">
