@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
 </head>
 <body>
-  <%@ include file="header.jsp" %>
+  <%@ include file="../header.jsp" %>
 
   <div class="confirm-page">
     <div class="confirm-card">
@@ -36,6 +36,6 @@
     </div>
   </div>
 
-  <%@ include file="footer.jsp" %>
+  <%@ include file="../footer.jsp" %>
 </body>
 </html>
