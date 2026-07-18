@@ -9,12 +9,10 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import model.CrocieraBean;
 import model.TappaBean;
 
 public class TappaDAOImpl implements TappaDAO{
     private static final String TABLE_NAME = "tappa";
-    private static final String TABLE_CROCIERA_NAME = "crociera";
     private DataSource ds;
 
     public TappaDAOImpl(DataSource ds){
@@ -53,45 +51,49 @@ public class TappaDAOImpl implements TappaDAO{
     }
 
     //tappe attive al momento della crociera
-    public synchronized List<TappaBean> doRetrieveByCrociera(CrocieraBean crociera) throws SQLException{
+    public synchronized List<TappaBean> doRetrieveByCrociera(int idCrociera) throws SQLException{
         ArrayList<TappaBean> tappe = new ArrayList<>();
-        String sql = "SELECT DISTINCT t.* FROM " + TABLE_NAME + " t " +  "LEFT JOIN attraversa a ON t.ID_tappa = a.ID_tappa " + "LEFT JOIN " + TABLE_CROCIERA_NAME + " c ON a.ID_crociera = c.ID_crociera " + "WHERE t.attivo = TRUE";
+        String sql = "SELECT t.*, a.data_sosta FROM " + TABLE_NAME + " t JOIN attraversa a ON t.ID_tappa = a.ID_tappa WHERE a.ID_crociera = ? AND t.attivo = TRUE ORDER BY a.data_sosta";
 
         try(Connection conn = ds.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery()) {
-            while(rs.next()) {
-                TappaBean tappa = new TappaBean();
+            PreparedStatement ps = conn.prepareStatement(sql);){
+                ps.setInt(1, idCrociera);
+                try(ResultSet rs = ps.executeQuery()) {
+                    while(rs.next()) {
+                        TappaBean tappa = new TappaBean();
 
-                tappa.setId(rs.getInt(1));
-                tappa.setLocalita(rs.getString(2));
-                tappa.setPorto(rs.getString(3));
-                tappa.setAttivo(rs.getBoolean(4));
+                        tappa.setId(rs.getInt(1));
+                        tappa.setLocalita(rs.getString(2));
+                        tappa.setPorto(rs.getString(3));
+                        tappa.setAttivo(rs.getBoolean(4));
 
-                tappe.add(tappa);
+                        tappe.add(tappa);
+                    }
+                }
             }
-        }
 
         return tappe;
     }
 
-    public synchronized List<TappaBean> doRetrieveByCrocieraAll(CrocieraBean crociera) throws SQLException{
+    public synchronized List<TappaBean> doRetrieveByCrocieraAll(int idCrociera) throws SQLException{
         ArrayList<TappaBean> tappe = new ArrayList<>();
-        String sql = "SELECT DISTINCT t.* FROM " + TABLE_NAME + " t " +  "LEFT JOIN attraversa a ON t.ID_tappa = a.ID_tappa " + "LEFT JOIN " + TABLE_CROCIERA_NAME + " c ON a.ID_crociera = c.ID_crociera ";
+        String sql = "SELECT t.*, a.data_sosta FROM " + TABLE_NAME + " t JOIN attraversa a ON t.ID_tappa = a.ID_tappa WHERE a.ID_crociera = ? ORDER BY a.data_sosta";
 
         try(Connection conn = ds.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery()) {
-            while(rs.next()) {
-                TappaBean tappa = new TappaBean();
+            PreparedStatement ps = conn.prepareStatement(sql)){
+                ps.setInt(1, idCrociera);
+                try(ResultSet rs = ps.executeQuery()) {
+                    while(rs.next()) {
+                        TappaBean tappa = new TappaBean();
 
-                tappa.setId(rs.getInt(1));
-                tappa.setLocalita(rs.getString(2));
-                tappa.setPorto(rs.getString(3));
-                tappa.setAttivo(rs.getBoolean(4));
+                        tappa.setId(rs.getInt(1));
+                        tappa.setLocalita(rs.getString(2));
+                        tappa.setPorto(rs.getString(3));
+                        tappa.setAttivo(rs.getBoolean(4));
 
-                tappe.add(tappa);
-            }
+                        tappe.add(tappa);
+                    }
+                }
         }
 
         return tappe;
@@ -99,7 +101,7 @@ public class TappaDAOImpl implements TappaDAO{
 
 
     public synchronized void doUpdate(TappaBean tappa) throws SQLException{
-        String sql = "UPDATE " + TABLE_NAME + " SET (ID_tappa, nome_tappa, nome_porto, attivo) VALUES (?, ?, ?, ?)";
+        String sql = "UPDATE " + TABLE_NAME + " SET (nome_tappa, nome_porto, attivo) VALUES (?, ?, ?)";
 
         TappaBean tappaConfermata = doRetrieveByKey(tappa.getId());
 
@@ -117,7 +119,6 @@ public class TappaDAOImpl implements TappaDAO{
 
          try(Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);){
-            ps.setInt(1, tappaConfermata.getId());
             ps.setString(2, tappaConfermata.getLocalita());
             ps.setString(3, tappaConfermata.getPorto());
             ps.setBoolean(4, tappaConfermata.isAttivo());
@@ -127,7 +128,7 @@ public class TappaDAOImpl implements TappaDAO{
     }
     
     public synchronized void doDelete(int id) throws SQLException{
-        String sql = "UPDATE " + TABLE_NAME + " SET attivo = FALSE WHERE ID_crociera = ?";
+        String sql = "UPDATE " + TABLE_NAME + " SET attivo = FALSE WHERE ID_tappa = ?";
         
         try(Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);){
