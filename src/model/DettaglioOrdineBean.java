@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class DettaglioOrdineBean implements Serializable {
 
@@ -13,7 +14,11 @@ public class DettaglioOrdineBean implements Serializable {
     private int idOrdine;
     private int idCrociera;
 
-    private String nomeCrociera;
+    private String nomeCrocieraArchiviato;
+    private String descrizioneArchiviato;
+    private Date dataInizioArchiviato;
+    private Date dataFineArchiviato;
+    private String tappeArchiviato;
 
     public DettaglioOrdineBean() {
     }
@@ -66,11 +71,43 @@ public class DettaglioOrdineBean implements Serializable {
         this.idCrociera = idCrociera;
     }
 
-    public String getNomeCrociera() {
-        return nomeCrociera;
+    public String getNomeCrocieraArchiviato() {
+        return nomeCrocieraArchiviato;
     }
 
-    public void setNomeCrociera(String nomeCrociera) {
-        this.nomeCrociera = nomeCrociera;
+    public void setNomeCrocieraArchiviato(String nomeCrocieraArchiviato) {
+        this.nomeCrocieraArchiviato = nomeCrocieraArchiviato;
+    }
+
+    public String getDescrizioneArchiviato() {
+        return descrizioneArchiviato;
+    }
+
+    public void setDescrizioneArchiviato(String descrizioneArchiviato) {
+        this.descrizioneArchiviato = descrizioneArchiviato;
+    }
+
+    public Date getDataInizioArchiviato() {
+        return dataInizioArchiviato;
+    }
+
+    public void setDataInizioArchiviato(Date dataInizioArchiviato) {
+        this.dataInizioArchiviato = dataInizioArchiviato;
+    }
+
+    public Date getDataFineArchiviato() {
+        return dataFineArchiviato;
+    }
+
+    public void setDataFineArchiviato(Date dataFineArchiviato) {
+        this.dataFineArchiviato = dataFineArchiviato;
+    }
+
+    public String getTappeArchiviato() {
+        return tappeArchiviato;
+    }
+
+    public void setTappeArchiviato(String tappeArchiviato) {
+        this.tappeArchiviato = tappeArchiviato;
     }
 }
