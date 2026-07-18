@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.UtenteBean;
 import utils.SecurityUtils;
 
-@WebServlet("/profile")
+@WebServlet("/common/profile")
 public class ProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UtenteDAO utenteDAO;
@@ -66,7 +66,7 @@ public class ProfileServlet extends HttpServlet {
         } catch (SQLException e) {
             throw new ServletException(e);
         }
-        response.sendRedirect(request.getContextPath() + "/profile");
+        response.sendRedirect(request.getContextPath() + "/common/profile");
     }
 
     private void updateInfo(HttpServletRequest request, UtenteBean utente) throws SQLException {
