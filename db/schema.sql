@@ -45,6 +45,11 @@ CREATE TABLE dettagli_ordine (
     num_biglietto_adulto INT DEFAULT 0,
     num_biglietto_bambino INT DEFAULT 0,
     prezzo_archiviato DECIMAL(10,2) NOT NULL,
+    nome_crociera_archiviato VARCHAR(100),
+    descrizione_archiviato VARCHAR(500),
+    data_inizio_archiviato DATE,
+    data_fine_archiviato DATE,
+    tappe_archiviato VARCHAR(2000),
     ID_ordine INT NOT NULL,
     ID_crociera INT NOT NULL,
     FOREIGN KEY (ID_ordine) REFERENCES ordine(ID_ordine) ON DELETE CASCADE,
@@ -55,7 +60,8 @@ CREATE TABLE dettagli_ordine (
 CREATE TABLE tappa (
     ID_tappa INT PRIMARY KEY AUTO_INCREMENT,
     nome_tappa VARCHAR(100) NOT NULL,
-    nome_porto VARCHAR(100) NOT NULL
+    nome_porto VARCHAR(100) NOT NULL,
+    attivo BOOLEAN DEFAULT TRUE
 );
 
 -- 7. Creazione Tabella ATTRAVERSA
