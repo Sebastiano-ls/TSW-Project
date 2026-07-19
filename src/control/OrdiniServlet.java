@@ -43,7 +43,6 @@ public class OrdiniServlet extends HttpServlet {
 
         try {
             List<OrdineBean> ordini = ordineDAO.doRetrieveByIdUtente(utente.getIdUtente());
-            System.out.println("[DEBUG] ordini trovati per utente " + utente.getIdUtente() + ": " + ordini.size());
             request.setAttribute("ordini", ordini);
             request.getRequestDispatcher("/WEB-INF/views/common/ordini.jsp")
                     .forward(request, response);
