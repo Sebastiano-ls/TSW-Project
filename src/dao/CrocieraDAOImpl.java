@@ -21,7 +21,7 @@ public class CrocieraDAOImpl implements CrocieraDAO{
     }
 
     public synchronized void doSave(CrocieraBean crociera) throws SQLException{
-        String sql = "INSERT INTO " + TABLE_NAME + "(nome_crociera, descrizione, data_inizio, data_fine, prezzo, sconto, immagine_crociera, immagine_tipo, attivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (nome_crociera, descrizione, data_inizio, data_fine, prezzo, sconto, immagine_crociera, immagine_tipo, attivo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = ds.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, crociera.getNome());
