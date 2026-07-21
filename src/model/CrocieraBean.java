@@ -9,8 +9,8 @@ public class CrocieraBean implements Serializable{
     private String des;
     private Date dataIn;
     private Date dataFin;
-    private int prezzo;
-    private int sconto;
+    private double prezzo;
+    private double sconto;
     private byte[] immagineCrociera;
     private String immagineTipo;
     private boolean attivo;
@@ -58,19 +58,19 @@ public class CrocieraBean implements Serializable{
         this.dataFin = dataFin;
     }
 
-    public int getPrezzo() {
+    public double getPrezzo() {
         return prezzo;
     }
 
-    public void setPrezzo(int prezzo) {
+    public void setPrezzo(double prezzo) {
         this.prezzo = prezzo;
     }
 
-    public int getSconto() {
+    public double getSconto() {
         return sconto;
     }
 
-    public void setSconto(int sconto) {
+    public void setSconto(double sconto) {
         this.sconto = sconto;
     }
 

@@ -14,6 +14,8 @@ import model.CrocieraBean;
 
 public class CrocieraDAOImpl implements CrocieraDAO{
     private static final String TABLE_NAME = "crociera";
+    private static final String ALL_COLS = "ID_crociera, nome_crociera, descrizione, data_inizio, data_fine, prezzo, sconto, immagine_crociera, immagine_tipo, attivo";
+    private static final String ALL_COLS_ALIAS = "c.ID_crociera, c.nome_crociera, c.descrizione, c.data_inizio, c.data_fine, c.prezzo, c.sconto, c.immagine_crociera, c.immagine_tipo, c.attivo";
     private DataSource ds;
 
     public CrocieraDAOImpl(DataSource ds){
@@ -38,24 +40,15 @@ public class CrocieraDAOImpl implements CrocieraDAO{
     }
 
     public synchronized CrocieraBean doRetrieveByKey(int id) throws SQLException{
-        CrocieraBean crociera = new CrocieraBean();
-        String sql = "SELECT * FROM " + TABLE_NAME + " WHERE ID_crociera = ?";
+        CrocieraBean crociera = null;
+        String sql = "SELECT " + ALL_COLS + " FROM " + TABLE_NAME + " WHERE ID_crociera = ?";
 
         try(Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);){
                 ps.setInt(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
-                    crociera.setId(rs.getInt(1));
-                    crociera.setNome(rs.getString(2));
-                    crociera.setDes(rs.getString(3));
-                    crociera.setDataInizio(rs.getDate(4));
-                    crociera.setDataFine(rs.getDate(5));
-                    crociera.setPrezzo(rs.getInt(6));
-                    crociera.setSconto(rs.getInt(7));
-                    crociera.setImmagineCrociera(rs.getBytes(8));
-                    crociera.setMimeType(rs.getString(9));
-                    crociera.setAttivo(rs.getBoolean(10));
+                    crociera = mapCrociera(rs);
                 }
             }
         }
@@ -67,7 +60,9 @@ public class CrocieraDAOImpl implements CrocieraDAO{
         String sql;
 
         //COSTRUISCO LA CROCIERA IN BASE AI SOLI ELEMENTI MODIFICATI DALL'ADMIN
-        CrocieraBean crocieraConfermata = doRetrieveByKey(crociera.getId());
+        CrocieraBean crocieraConfermata;
+        if((crocieraConfermata = doRetrieveByKey(crociera.getId())) == null )
+            throw new SQLException("Impossibile aggiornare: Crociera con ID " + crociera.getId() + " non trovata.");
 
         if(crociera.getNome() != null){
             crocieraConfermata.setNome(crociera.getNome());
@@ -140,7 +135,7 @@ public class CrocieraDAOImpl implements CrocieraDAO{
 
     public synchronized List<CrocieraBean> doRetrieveByParams(String destinazione, String partenza, Date dataIn) throws SQLException{
         ArrayList<CrocieraBean> risultati = new ArrayList<>();
-        String sql="SELECT DISTINCT c.* FROM " + TABLE_NAME + " c " +  "LEFT JOIN attraversa a ON c.ID_crociera = a.ID_crociera " + "LEFT JOIN tappa t ON a.ID_tappa = t.ID_tappa " + "WHERE c.attivo = TRUE";
+        String sql="SELECT DISTINCT " + ALL_COLS_ALIAS + " FROM " + TABLE_NAME + " c " +  "LEFT JOIN attraversa a ON c.ID_crociera = a.ID_crociera " + "LEFT JOIN tappa t ON a.ID_tappa = t.ID_tappa " + "WHERE c.attivo = TRUE";
 
         //VERIFICO QUALI PARAMETRI USARE PER LA RICERCA
         List<Object> parametri = new ArrayList<>();
@@ -175,20 +170,7 @@ public class CrocieraDAOImpl implements CrocieraDAO{
                 }
             try (ResultSet rs = ps.executeQuery()) {
                 while(rs.next()) {
-                    CrocieraBean crociera = new CrocieraBean();
-
-                    crociera.setId(rs.getInt(1));
-                    crociera.setNome(rs.getString(2));
-                    crociera.setDes(rs.getString(3));
-                    crociera.setDataInizio(rs.getDate(4));
-                    crociera.setDataFine(rs.getDate(5));
-                    crociera.setPrezzo(rs.getInt(6));
-                    crociera.setSconto(rs.getInt(7));
-                    crociera.setImmagineCrociera(rs.getBytes(8));
-                    crociera.setMimeType(rs.getString(9));
-                    crociera.setAttivo(rs.getBoolean(10));
-
-                    risultati.add(crociera);
+                    risultati.add(mapCrociera(rs));
                 }
             }
         }
@@ -197,25 +179,12 @@ public class CrocieraDAOImpl implements CrocieraDAO{
 
     public synchronized List<CrocieraBean> doRetrieveAllAttivi() throws SQLException{
         ArrayList<CrocieraBean> risultati = new ArrayList<>();
-        String sql = "SELECT *" + " FROM " + TABLE_NAME + " WHERE attivo = TRUE ORDER BY data_inizio DESC";
+        String sql = "SELECT " + ALL_COLS + " FROM " + TABLE_NAME + " WHERE attivo = TRUE ORDER BY data_inizio DESC";
         try (Connection conn = ds.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                CrocieraBean crociera = new CrocieraBean();
-
-                crociera.setId(rs.getInt(1));
-                crociera.setNome(rs.getString(2));
-                crociera.setDes(rs.getString(3));
-                crociera.setDataInizio(rs.getDate(4));
-                crociera.setDataFine(rs.getDate(5));
-                crociera.setPrezzo(rs.getInt(6));
-                crociera.setSconto(rs.getInt(7));
-                crociera.setImmagineCrociera(rs.getBytes(8));
-                crociera.setMimeType(rs.getString(9));
-                crociera.setAttivo(rs.getBoolean(10));
-
-                risultati.add(crociera);
+                risultati.add(mapCrociera(rs));
             }
         }
         return risultati;
@@ -223,25 +192,12 @@ public class CrocieraDAOImpl implements CrocieraDAO{
 
     public synchronized List<CrocieraBean> doRetrieveAll() throws SQLException{
         ArrayList<CrocieraBean> risultati = new ArrayList<>();
-        String sql = "SELECT *" + " FROM " + TABLE_NAME + " ORDER BY data_inizio DESC";
+        String sql = "SELECT " + ALL_COLS + " FROM " + TABLE_NAME + " ORDER BY data_inizio DESC";
         try (Connection conn = ds.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                CrocieraBean crociera = new CrocieraBean();
-
-                crociera.setId(rs.getInt(1));
-                crociera.setNome(rs.getString(2));
-                crociera.setDes(rs.getString(3));
-                crociera.setDataInizio(rs.getDate(4));
-                crociera.setDataFine(rs.getDate(5));
-                crociera.setPrezzo(rs.getInt(6));
-                crociera.setSconto(rs.getInt(7));
-                crociera.setImmagineCrociera(rs.getBytes(8));
-                crociera.setMimeType(rs.getString(9));
-                crociera.setAttivo(rs.getBoolean(10));
-
-                risultati.add(crociera);
+                risultati.add(mapCrociera(rs));
             }
         }
         return risultati;
@@ -260,5 +216,20 @@ public class CrocieraDAOImpl implements CrocieraDAO{
             }
         }
         return null;
+    }
+
+    private CrocieraBean mapCrociera(ResultSet rs) throws SQLException {
+        CrocieraBean crociera = new CrocieraBean();
+        crociera.setId(rs.getInt("ID_crociera"));
+        crociera.setNome(rs.getString("nome_crociera"));
+        crociera.setDes(rs.getString("descrizione"));
+        crociera.setDataInizio(rs.getDate("data_inizio"));
+        crociera.setDataFine(rs.getDate("data_fine"));
+        crociera.setPrezzo(rs.getDouble("prezzo"));
+        crociera.setSconto(rs.getDouble("sconto"));
+        crociera.setImmagineCrociera(rs.getBytes("immagine_crociera"));
+        crociera.setMimeType(rs.getString("immagine_tipo"));
+        crociera.setAttivo(rs.getBoolean("attivo"));
+        return crociera;
     }
 }
