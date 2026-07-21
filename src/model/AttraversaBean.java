@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class AttraversaBean implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     private int id_crociera;
     private int id_tappa;
     private Date dataSosta;

@@ -17,6 +17,7 @@ import javax.sql.DataSource;
 import dao.CrocieraDAO;
 import dao.CrocieraDAOImpl;
 import model.CrocieraBean;
+import model.ItemCarrello;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
@@ -64,7 +65,7 @@ public class HomeServlet extends HttpServlet {
         }
 
         if (session.getAttribute("carrello") == null)
-            session.setAttribute("carrello", new ArrayList<CrocieraBean>());
+            session.setAttribute("carrello", new ArrayList<ItemCarrello>());
 
         request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
     }

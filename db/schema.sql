@@ -60,7 +60,7 @@ CREATE TABLE dettagli_ordine (
 CREATE TABLE tappa (
     ID_tappa INT PRIMARY KEY AUTO_INCREMENT,
     nome_tappa VARCHAR(100) NOT NULL,
-    nome_porto VARCHAR(100) NOT NULL
+    nome_porto VARCHAR(100) NOT NULL,
     attivo BOOLEAN DEFAULT TRUE
 );
 

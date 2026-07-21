@@ -3,6 +3,8 @@ package model;
 import java.io.Serializable;
 
 public class TappaBean implements Serializable{
+    private static final long serialVersionUID = 1L;
+    
     int id;
     String localita;
     String porto;
