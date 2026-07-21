@@ -1,15 +1,6 @@
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+package control;
 
-import java.io.IOException;
-import java.sql.SQLException;
-import java.sql.Date;
-import java.time.LocalDate;
-import java.util.List;
+import jakarta.servlet.annotation.WebServlet;
 
 @WebServlet("/dettaglio")
 public class DettaglioCrocieraServlet {
