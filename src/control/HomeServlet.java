@@ -64,7 +64,7 @@ public class HomeServlet extends HttpServlet {
         if (session.getAttribute("carrello") == null)
             session.setAttribute("carrello", new ArrayList<CrocieraBean>());
 
-        request.getRequestDispatcher("/WEB-INF/views/common/home.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(request, response);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
