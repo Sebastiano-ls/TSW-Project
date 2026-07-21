@@ -20,7 +20,7 @@ public class TappaDAOImpl implements TappaDAO{
     }
 
     public synchronized void doSave(TappaBean tappa) throws SQLException{
-        String sql = "INSERT INTO " + TABLE_NAME + "(nome_tappa, nome_porto, attivo) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (nome_tappa, nome_porto, attivo) VALUES (?, ?, ?)";
         try (Connection conn = ds.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, tappa.getLocalita());
@@ -101,7 +101,7 @@ public class TappaDAOImpl implements TappaDAO{
 
 
     public synchronized void doUpdate(TappaBean tappa) throws SQLException{
-        String sql = "UPDATE " + TABLE_NAME + " SET (nome_tappa, nome_porto, attivo) VALUES (?, ?, ?)";
+        String sql = "UPDATE " + TABLE_NAME + " SET nome_tappa = ?, nome_porto = ?, attivo = ? WHERE ID_tappa = ?";
 
         TappaBean tappaConfermata = doRetrieveByKey(tappa.getId());
 
@@ -119,9 +119,10 @@ public class TappaDAOImpl implements TappaDAO{
 
          try(Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);){
-            ps.setString(2, tappaConfermata.getLocalita());
-            ps.setString(3, tappaConfermata.getPorto());
-            ps.setBoolean(4, tappaConfermata.isAttivo());
+            ps.setString(1, tappaConfermata.getLocalita());
+            ps.setString(2, tappaConfermata.getPorto());
+            ps.setBoolean(3, tappaConfermata.isAttivo());
+            ps.setInt(4, tappaConfermata.getId());
                 
             ps.executeUpdate();
         }

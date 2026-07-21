@@ -13,7 +13,7 @@ import model.AttraversaBean;
 import model.CrocieraBean;
 import model.TappaBean;
 
-public class AttraversaDAOImpl {
+public class AttraversaDAOImpl implements AttraversaDAO{
     private static final String TABLE_NAME = "attraversa";
     private DataSource ds;
 
@@ -22,7 +22,7 @@ public class AttraversaDAOImpl {
     }
 
     public void doSave(AttraversaBean bean) throws SQLException{
-        String sql = "INSERT INTO " + TABLE_NAME + " (ID_crcociera, ID_tappa, data_sosta) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO " + TABLE_NAME + " (ID_crociera, ID_tappa, data_sosta) VALUES (?, ?, ?)";
 
         try(Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)){
@@ -82,7 +82,7 @@ public class AttraversaDAOImpl {
 
     public List<TappaBean> doRetrieveByCrociera(int idCrociera) throws SQLException{
         ArrayList<TappaBean> tappe = new ArrayList<>();
-        String sql = "SELECT t.ID_tappa, t.nome_tappa, t.nome_porto, t.attivo FROM " + TABLE_NAME + " a JOIN tappa t ON a.ID_tappa = t.ID_tappa WHERE a.id_crociera = ? AND t.attivo = true";
+        String sql = "SELECT t.ID_tappa, t.nome_tappa, t.nome_porto, t.attivo FROM " + TABLE_NAME + " a JOIN tappa t ON a.ID_tappa = t.ID_tappa WHERE a.ID_crociera = ? AND t.attivo = true";
 
         try (Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -107,7 +107,7 @@ public class AttraversaDAOImpl {
 
     public List<TappaBean> doRetrieveByCrocieraAll(int idCrociera) throws SQLException{
         ArrayList<TappaBean> tappe = new ArrayList<>();
-        String sql = "SELECT t.ID_tappa, t.nome_tappa, t.nome_porto, t.attivo FROM " + TABLE_NAME + " a JOIN tappa t ON a.ID_tappa = t.ID_tappa WHERE a.id_crociera = ?";
+        String sql = "SELECT t.ID_tappa, t.nome_tappa, t.nome_porto, t.attivo FROM " + TABLE_NAME + " a JOIN tappa t ON a.ID_tappa = t.ID_tappa WHERE a.ID_crociera = ?";
 
         try (Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -132,7 +132,7 @@ public class AttraversaDAOImpl {
 
     public List<CrocieraBean> doRetrieveByTappa(int idTappa) throws SQLException{
         ArrayList<CrocieraBean> crociere = new ArrayList<>();
-        String sql = "SELECT c.ID_crociera, c.nome_crociera c.descrizione, c.data_inizio, c.data_fine, c.prezzo, c.sconto, c.immagine_crociera, c.immagine_tipo, c.attivo FROM " + TABLE_NAME + " a JOIN crociera c ON a.ID_crociera = c.ID_crociera WHERE a.id_tappa = ? AND t.attivo = true";
+        String sql = "SELECT c.ID_crociera, c.nome_crociera, c.descrizione, c.data_inizio, c.data_fine, c.prezzo, c.sconto, c.immagine_crociera, c.immagine_tipo, c.attivo FROM " + TABLE_NAME + " a JOIN crociera c ON a.ID_crociera = c.ID_crociera WHERE a.ID_tappa = ? AND c.attivo = true";
 
         try (Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -163,7 +163,7 @@ public class AttraversaDAOImpl {
 
     public List<CrocieraBean> doRetrieveByTappaAll(int idTappa) throws SQLException{
         ArrayList<CrocieraBean> crociere = new ArrayList<>();
-        String sql = "SELECT c.ID_crociera, c.nome_crociera c.descrizione, c.data_inizio, c.data_fine, c.prezzo, c.sconto, c.immagine_crociera, c.immagine_tipo, c.attivo FROM " + TABLE_NAME + " a JOIN crociera c ON a.ID_crociera = c.ID_crociera WHERE a.id_tappa = ?";
+        String sql = "SELECT c.ID_crociera, c.nome_crociera, c.descrizione, c.data_inizio, c.data_fine, c.prezzo, c.sconto, c.immagine_crociera, c.immagine_tipo, c.attivo FROM " + TABLE_NAME + " a JOIN crociera c ON a.ID_crociera = c.ID_crociera WHERE a.ID_tappa = ?";
 
         try (Connection conn = ds.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql)) {
