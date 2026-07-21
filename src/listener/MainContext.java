@@ -22,7 +22,7 @@ public class MainContext implements ServletContextListener {
             Context envCtx = (Context) initCtx.lookup("java:comp/env");
             ds = (DataSource) envCtx.lookup("jdbc/sscrociere");
         } catch (NamingException e) {
-            System.out.println("Error:" + e.getMessage());
+            context.log("errore inizializzazione datasource: " + e.getMessage(), e);
         }
         context.setAttribute("DataSource", ds);
     }

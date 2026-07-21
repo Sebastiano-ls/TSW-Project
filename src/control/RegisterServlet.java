@@ -25,7 +25,7 @@ public class RegisterServlet extends HttpServlet {
     public void init() throws ServletException {
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
         if (ds == null) {
-            throw new ServletException("DataSource NON DISPONIBILE");
+            throw new ServletException("datasource non disponibile");
         }
         utenteDAO = new UtenteDAOImpl(ds);
     }
@@ -33,7 +33,7 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/common/register.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(request, response);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class RegisterServlet extends HttpServlet {
             cognome == null || cognome.trim().isEmpty() ||
             email == null || email.trim().isEmpty() ||
             password == null || password.trim().isEmpty()) {
-            request.setAttribute("ERRORE", "TUTTI I CAMPI OBBLIGATORI DEVONO ESSERE COMPILATI!");
+            request.setAttribute("error", "tutti i campi obbligatori devono essere compilati");
             doGet(request, response);
             return;
         }
@@ -72,7 +72,7 @@ public class RegisterServlet extends HttpServlet {
             utenteDAO.doSave(utente);
             response.sendRedirect(request.getContextPath() + "/login");
         } catch (SQLException e) {
-            request.setAttribute("ERRORE", "E' GIÀ PRESENTE UN ACCOUNT");
+            request.setAttribute("error", "Email già registrata.");
             doGet(request, response);
         }
     }

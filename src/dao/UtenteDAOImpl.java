@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.sql.DataSource;
 
@@ -26,11 +28,11 @@ public class UtenteDAOImpl implements UtenteDAO {
         try (Connection connection = ds.getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)) {
 
-            //BINDING PARAMETRI PER PREVENIRE SQL INJECTION
+            // binding parametri per prevenire SQL injection
             preparedStatement.setString(1, utente.getNome());
             preparedStatement.setString(2, utente.getCognome());
             preparedStatement.setString(3, utente.getEmail());
-            preparedStatement.setString(4, utente.getPassword()); //PASSWORD GIA' CIFRATA IN SHA-512
+            preparedStatement.setString(4, utente.getPassword());
             preparedStatement.setString(5, utente.getGenere());
             preparedStatement.setDate(6, utente.getDataNascita());
             preparedStatement.setString(7, utente.getNumTelefono());
@@ -41,7 +43,7 @@ public class UtenteDAOImpl implements UtenteDAO {
     }
 
     @Override
-    public UtenteBean doRetrieveByEmailAndPassword(String email, String password) throws SQLException {
+    public synchronized UtenteBean doRetrieveByEmailAndPassword(String email, String password) throws SQLException {
         UtenteBean bean = null;
         String selectSQL = "SELECT * FROM " + TABLE_NAME + " WHERE email = ? AND password = ?";
 
@@ -49,7 +51,7 @@ public class UtenteDAOImpl implements UtenteDAO {
                 PreparedStatement preparedStatement = connection.prepareStatement(selectSQL)) {
 
             preparedStatement.setString(1, email);
-            preparedStatement.setString(2, password); // HASH INSERITO DALL'UTENTE PER VERIFICARNE L'INTEGRITÀ
+            preparedStatement.setString(2, password);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
                     bean = new UtenteBean();
@@ -65,7 +67,7 @@ public class UtenteDAOImpl implements UtenteDAO {
                 }
             }
         }
-        return bean; //SE LE CREDENZIALI NON COINCIDONO, RITORNA NULL
+        return bean;
     }
 
     @Override
@@ -125,6 +127,30 @@ public class UtenteDAOImpl implements UtenteDAO {
             preparedStatement.setInt(1, idUtente);
             preparedStatement.executeUpdate();
         }
+    }
+
+    @Override
+    public synchronized List<UtenteBean> doRetrieveAll() throws SQLException {
+        List<UtenteBean> lista = new ArrayList<>();
+        String sql = "SELECT * FROM " + TABLE_NAME + " ORDER BY ID_utente";
+        try (Connection c = ds.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                UtenteBean bean = new UtenteBean();
+                bean.setIdUtente(rs.getInt("ID_utente"));
+                bean.setNome(rs.getString("nome"));
+                bean.setCognome(rs.getString("cognome"));
+                bean.setEmail(rs.getString("email"));
+                bean.setPassword(rs.getString("password"));
+                bean.setGenere(rs.getString("genere"));
+                bean.setDataNascita(rs.getDate("data_nascita"));
+                bean.setNumTelefono(rs.getString("num_telefono"));
+                bean.setRuolo(rs.getString("ruolo"));
+                lista.add(bean);
+            }
+        }
+        return lista;
     }
 
     @Override

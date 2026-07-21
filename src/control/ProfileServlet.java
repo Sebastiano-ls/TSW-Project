@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.UtenteBean;
 import utils.SecurityUtils;
 
-@WebServlet("/profile")
+@WebServlet("/common/profile")
 public class ProfileServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private UtenteDAO utenteDAO;
@@ -55,13 +55,18 @@ public class ProfileServlet extends HttpServlet {
         try {
             if ("updateInfo".equals(action)) {
                 updateInfo(request, utente);
+                request.getSession().setAttribute("success", "dati aggiornati con successo");
             } else if ("updatePassword".equals(action)) {
-                updatePassword(request, utente);
+                if (!updatePassword(request, utente)) {
+                    request.getSession().setAttribute("error", "password attuale errata");
+                } else {
+                    request.getSession().setAttribute("success", "password aggiornata con successo");
+                }
             }
         } catch (SQLException e) {
             throw new ServletException(e);
         }
-        response.sendRedirect(request.getContextPath() + "/profile");
+        response.sendRedirect(request.getContextPath() + "/common/profile");
     }
 
     private void updateInfo(HttpServletRequest request, UtenteBean utente) throws SQLException {
@@ -84,23 +89,24 @@ public class ProfileServlet extends HttpServlet {
         request.getSession().setAttribute("utente", utente);
     }
 
-    private void updatePassword(HttpServletRequest request, UtenteBean utente) throws SQLException {
+    private boolean updatePassword(HttpServletRequest request, UtenteBean utente) throws SQLException {
         String oldPassword = request.getParameter("oldPassword");
         String newPassword = request.getParameter("newPassword");
 
         if (oldPassword == null || newPassword == null ||
             oldPassword.trim().isEmpty() || newPassword.trim().isEmpty()) {
-            return;
+            return false;
         }
 
         String oldHash = SecurityUtils.toDigest(oldPassword);
         if (!oldHash.equals(utente.getPassword())) {
-            return;
+            return false;
         }
 
         String newHash = SecurityUtils.toDigest(newPassword);
         utenteDAO.doUpdatePassword(utente.getIdUtente(), newHash);
         utente.setPassword(newHash);
         request.getSession().setAttribute("utente", utente);
+        return true;
     }
 }

@@ -32,14 +32,20 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/WEB-INF/views/common/login.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String email = request.getParameter("email");
-        String password = SecurityUtils.toDigest(request.getParameter("password"));
+        String passwordParam = request.getParameter("password");
+        if (email == null || email.trim().isEmpty() || passwordParam == null || passwordParam.isEmpty()) {
+            request.setAttribute("error", "email e password sono obbligatorie");
+            doGet(request, response);
+            return;
+        }
+        String password = SecurityUtils.toDigest(passwordParam);
 
         try {
             UtenteBean utente = utenteDAO.doRetrieveByEmailAndPassword(email, password);
@@ -47,7 +53,7 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("utente", utente);
                 response.sendRedirect(request.getContextPath() + "/home");
             } else {
-                request.setAttribute("error", "Email o password errate");
+                request.setAttribute("error", "email o password errate");
                 doGet(request, response);
             }
         } catch (SQLException e) {
