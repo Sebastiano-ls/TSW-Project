@@ -21,7 +21,7 @@ import dao.CrocieraDAO;
 import dao.CrocieraDAOImpl;
 import model.CrocieraBean;
 
-@WebServlet("/ricerca")
+@WebServlet("/catalogo")
 public class RicercaServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private CrocieraDAO crocieraDAO;
@@ -54,14 +54,20 @@ public class RicercaServlet extends HttpServlet {
             //CHIAMO IL DAO
             try{
                 List<CrocieraBean> risultati = crocieraDAO.doRetrieveByParams(des, par, data);
-
-                //AGGIUNGO I RIUSLTATI NELLA RICHIESTA E LA INOLTRO ALLA JSP
-                request.setAttribute("risultati", risultati);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/risultati.jsp");
-                dispatcher.forward(request, response);
+                request.setAttribute("crociere", risultati);
             } catch (SQLException e) {
-            throw new ServletException(e);
+                throw new ServletException(e);
+            }
+        }else if(action.equalsIgnoreCase("prezzi_bassi")){
+            try{
+                List<CrocieraBean> risultati = crocieraDAO.doRetrieveByPrezziBassi();
+                request.setAttribute("crociere", risultati);
+            } catch (SQLException e){
+                throw new ServletException(e);
             }
         }
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/risultati.jsp");
+        dispatcher.forward(request, response);
     }
 }

@@ -134,7 +134,7 @@ public class CrocieraDAOImpl implements CrocieraDAO{
     }
 
     public synchronized List<CrocieraBean> doRetrieveByParams(String destinazione, String partenza, Date dataIn) throws SQLException{
-        ArrayList<CrocieraBean> risultati = new ArrayList<>();
+        List<CrocieraBean> risultati = new ArrayList<>();
         String sql="SELECT DISTINCT " + ALL_COLS_ALIAS + " FROM " + TABLE_NAME + " c " +  "LEFT JOIN attraversa a ON c.ID_crociera = a.ID_crociera " + "LEFT JOIN tappa t ON a.ID_tappa = t.ID_tappa " + "WHERE c.attivo = TRUE";
 
         //VERIFICO QUALI PARAMETRI USARE PER LA RICERCA
@@ -177,8 +177,21 @@ public class CrocieraDAOImpl implements CrocieraDAO{
         return risultati;
     }
 
+    public synchronized List<CrocieraBean> doRetrieveByPrezziBassi() throws SQLException{
+        List<CrocieraBean> risultati = new ArrayList<>();
+        String sql = "SELECT " + ALL_COLS + " FROM " + TABLE_NAME + " WHERE attivo = TRUE ORDER BY (prezzo - (prezzo * sconto / 100.0)) ASC";
+        try (Connection conn = ds.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                risultati.add(mapCrociera(rs));
+            }
+        }
+        return risultati;
+    }
+
     public synchronized List<CrocieraBean> doRetrieveAllAttivi() throws SQLException{
-        ArrayList<CrocieraBean> risultati = new ArrayList<>();
+        List<CrocieraBean> risultati = new ArrayList<>();
         String sql = "SELECT " + ALL_COLS + " FROM " + TABLE_NAME + " WHERE attivo = TRUE ORDER BY data_inizio DESC";
         try (Connection conn = ds.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);
@@ -191,7 +204,7 @@ public class CrocieraDAOImpl implements CrocieraDAO{
     }
 
     public synchronized List<CrocieraBean> doRetrieveAll() throws SQLException{
-        ArrayList<CrocieraBean> risultati = new ArrayList<>();
+        List<CrocieraBean> risultati = new ArrayList<>();
         String sql = "SELECT " + ALL_COLS + " FROM " + TABLE_NAME + " ORDER BY data_inizio DESC";
         try (Connection conn = ds.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql);

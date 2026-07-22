@@ -12,6 +12,7 @@ public interface CrocieraDAO {
     public void doUpdate(CrocieraBean crociera) throws SQLException;
     public void doDelete(int id) throws SQLException;
     public List<CrocieraBean> doRetrieveByParams(String destinazione, String partenza, Date dataIn) throws SQLException;
+    public List<CrocieraBean> doRetrieveByPrezziBassi() throws SQLException;
     public List<CrocieraBean> doRetrieveAllAttivi() throws SQLException;
     public List<CrocieraBean> doRetrieveAll() throws SQLException;
     public byte[] doRetrieveImage(int id) throws SQLException;
