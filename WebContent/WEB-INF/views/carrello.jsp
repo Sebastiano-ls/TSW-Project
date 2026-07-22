@@ -34,7 +34,7 @@
             <% } else {
                 double totaleCarrello = 0;
                 for (CarrelloItem item : carrello) {
-                    totaleCarrello += item.getSubtotale();
+                    totaleCarrello += item.getTotale();
                 }
             %>
 
@@ -84,7 +84,7 @@
                         </form>
                     </span>
 
-                    <span class="carrello-col-subtotale carrello-subtotale-<%= i %>"><%= String.format("%.2f", item.getSubtotale()) %> €</span>
+                    <span class="carrello-col-subtotale carrello-subtotale-<%= i %>"><%= String.format("%.2f", item.getTotale()) %> €</span>
                     
                     <span class="carrello-col-azione">
                         <form action="${pageContext.request.contextPath}/carrello" method="post">
