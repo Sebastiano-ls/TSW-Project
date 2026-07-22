@@ -1,7 +1,7 @@
 <footer class="footer">
-  <div class="footer-grid">
+  <div class="griglia-footer">
     <div class="footer-col">
-      <h4><img src="images/S&S_Cruises_Logo.jpeg" alt="Logo not found" width="150" height="100">⚓ S&S Crociere</h4>
+      <h4><img src="images/S&S_Cruises_Logo.jpeg" alt="S&S Crociere" class="footer-logo">S&S Crociere</h4>
       <p>Il tuo partner per viaggi indimenticabili. Dal 2026.</p>
     </div>
     <div class="footer-col">
