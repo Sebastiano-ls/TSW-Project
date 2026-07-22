@@ -110,7 +110,7 @@ public class CheckoutServlet extends HttpServlet{
                 StringBuilder sb = new StringBuilder();
                 for (int i = 0; i < tappe.size(); i++) {
                     if (i > 0) 
-                        sb.append(" → ");
+                        sb.append(" &rarr ");
                     sb.append(tappe.get(i).getLocalita());
                 }
 

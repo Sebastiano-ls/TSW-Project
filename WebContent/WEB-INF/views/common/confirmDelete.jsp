@@ -8,34 +8,34 @@
     }
 %>
 <!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Elimina Account</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
-</head>
-<body>
-  <%@ include file="../header.jsp" %>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elimina Account</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
+  </head>
+  <body>
+    <%@ include file="../header.jsp" %>
 
-  <div class="confirm-page">
-    <div class="confirm-card">
-      <h2>Elimina Account</h2>
-      <p>Sei sicuro di voler eliminare il tuo account?<br>
-      Questa operazione è irreversibile e tutti i tuoi dati verranno cancellati.</p>
-      <form action="${pageContext.request.contextPath}/account/delete" method="post">
-        <input type="hidden" name="action" value="delete">
-        <input type="hidden" name="id" value="<%= utente.getIdUtente() %>">
-        <div class="confirm-actions">
-          <a href="#" onclick="history.back();return false;" class="btn btn-outline">Annulla</a>
-          <button type="submit" class="btn btn-danger">Elimina account</button>
-        </div>
-      </form>
+    <div class="confirm-page">
+      <div class="confirm-card">
+        <h2>Elimina Account</h2>
+        <p>Sei sicuro di voler eliminare il tuo account?<br>
+        Questa operazione è irreversibile e tutti i tuoi dati verranno cancellati.</p>
+        <form action="${pageContext.request.contextPath}/account/delete" method="post">
+          <input type="hidden" name="action" value="delete">
+          <input type="hidden" name="id" value="<%= utente.getIdUtente() %>">
+          <div class="confirm-actions">
+            <a href="#" onclick="history.back();return false;" class="btn btn-outline">Annulla</a>
+            <button type="submit" class="btn btn-danger">Elimina account</button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
 
-  <%@ include file="../footer.jsp" %>
-</body>
+    <%@ include file="../footer.jsp" %>
+  </body>
 </html>
