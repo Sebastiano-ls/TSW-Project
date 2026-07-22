@@ -28,9 +28,11 @@ public class RicercaServlet extends HttpServlet {
 
     public void init() throws ServletException{
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
+
         if (ds == null) {
             throw new ServletException("DataSource non disponibile nel contesto");
         }
+        
         crocieraDAO = new CrocieraDAOImpl(ds);
     }
 
@@ -41,7 +43,7 @@ public class RicercaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String action = request.getParameter("ricercaAction");
-        if(action.equalsIgnoreCase("ricerca")){
+        if("ricerca".equalsIgnoreCase(action)){
             //PRENDO I PARAMETRI DEL FORM DALLA RICHIESTA
             String des = request.getParameter("des");
             String par = request.getParameter("par");
@@ -58,7 +60,7 @@ public class RicercaServlet extends HttpServlet {
             } catch (SQLException e) {
                 throw new ServletException(e);
             }
-        }else if(action.equalsIgnoreCase("prezzi_bassi")){
+        }else if("prezzi_bassi".equalsIgnoreCase(action)){
             try{
                 List<CrocieraBean> risultati = crocieraDAO.doRetrieveByPrezziBassi();
                 request.setAttribute("crociere", risultati);

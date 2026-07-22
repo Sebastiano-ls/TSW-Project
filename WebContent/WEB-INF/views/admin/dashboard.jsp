@@ -16,9 +16,9 @@
     <body>
     <%@ include file="../header.jsp" %>
 
-    <div class="admin-page profilo-page">
+    <div class="admin-page profile-page">
         <div class="container">
-            <div class="profilo-header">
+            <div class="profile-header">
                 <h1>Pannello Admin</h1>
                 <p>Benvenuto, <%= utente.getNome() %>. Gestisci crociere, ordini e utenti.</p>
             </div>
