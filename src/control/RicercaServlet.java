@@ -40,7 +40,7 @@ public class RicercaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String action = request.getParameter("action");
+        String action = request.getParameter("ricercaAction");
         if(action.equalsIgnoreCase("ricerca")){
             //PRENDO I PARAMETRI DEL FORM DALLA RICHIESTA
             String des = request.getParameter("des");

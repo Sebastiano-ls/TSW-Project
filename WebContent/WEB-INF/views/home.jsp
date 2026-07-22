@@ -18,10 +18,8 @@
             <p>Scopri le nostre crociere verso le destinazioni più belle del mondo.</p>
     
             <section>
-                <form class="ricerca" action="${pageContext.request.contextPath}/catalogo" method="post">
+                <form class="ricerca" action="${pageContext.request.contextPath}/catalogo?ricercaAction='ricerca'" method="post">
                     <fieldset>
-                        <input type="hidden" name="action" value="ricerca">
-
                         <legend>Prenota la tua crociera</legend>
                         <select name="des">
                             <option value="" selected>Destinazione</option>
@@ -112,10 +110,10 @@
             </section>
 
              <!-- Chiamate predefinite -->
-            <section class="sezione bianca">
+            <section class="sezione-bianca">
                 <h2>Vedi anche: <span>Prezzi più Bassi</span></h2>
                 <div class="container">
-                    <a href="${pageContext.request.contextPath}/ricerca?action=prezzi_bassi"> <img src="" alt="PREZZI PIU BASSI"> </a>
+                    <a href="${pageContext.request.contextPath}/ricerca?ricercaAction='prezzi_bassi'"> <img src="" alt="PREZZI PIU BASSI"> </a>
                 </div>
 
                 <h2>Parla con noi</h2>
