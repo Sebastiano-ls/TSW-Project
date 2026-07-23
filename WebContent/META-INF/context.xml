@@ -7,7 +7,7 @@
         maxTotal="20"
         maxIdle="10"
         maxWaitMillis="10000"
-        username="user"
-        password="CaffEZuchheratO623_"
+        username="root"
+        password="CaffEZuccheratO623_"
         url="jdbc:mysql://localhost:3306/sscrociere?serverTimezone=UTC"/>
 </Context>

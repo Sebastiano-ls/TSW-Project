@@ -80,6 +80,6 @@ public class AdminCrocieraTappeServlet extends HttpServlet{
             throw new ServletException(e);
         }
 
-        response.sendRedirect(request.getContextPath() + "/admin/crociera-tappe?action=manage&idCrociera=" + idCrociera);
+        response.sendRedirect(request.getContextPath() + "/admin/crociera-tappe?actionAdmin=manage&idCrociera=" + idCrociera);
     }
 }
