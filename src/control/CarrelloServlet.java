@@ -1,6 +1,5 @@
 package control;
 
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -14,7 +13,6 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Locale;
 
 import dao.CrocieraDAO;
 import dao.CrocieraDAOImpl;
@@ -25,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/carrello")
-@MultipartConfig
 public class CarrelloServlet extends HttpServlet{
     private static final long serialVersionUID = 1L;
     private CrocieraDAO crocieraDAO;
@@ -64,6 +61,7 @@ public class CarrelloServlet extends HttpServlet{
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "id crociera non valido");
                     return;
                 }
+                
                 int adulti = parseIntParam(request.getParameter("adulti"), 1);
                 int bambini = parseIntParam(request.getParameter("bambini"), 0);
 
