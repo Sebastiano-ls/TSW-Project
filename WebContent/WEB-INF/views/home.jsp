@@ -81,7 +81,7 @@
     </div>
   </section>
 
-  <section class="section sezione-bianca">
+  <section id="destinazioni" class="section sezione-bianca">
     <h2>Destinazioni</h2>
     <p class="sottotitolo">Scegli la tua prossima meta.</p>
     <div class="container">

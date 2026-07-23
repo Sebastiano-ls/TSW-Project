@@ -7,7 +7,6 @@
     <a href="${pageContext.request.contextPath}/home" class="navbar-brand"><img src="${pageContext.request.contextPath}/images/logo.png" alt="S&S Crociere" class="navbar-logo"> S&S Crociere</a>
     <ul class="navbar-nav">
       <li><a href="${pageContext.request.contextPath}/home" class="nav-link">Home</a></li>
-      <li><a href="${pageContext.request.contextPath}/home#ricerca" class="nav-link">Prenota ora</a></li>
       <li><a href="${pageContext.request.contextPath}/catalogo" class="nav-link">Catalogo</a></li>
       <li><a href="${pageContext.request.contextPath}/carrello" class="nav-link">Carrello</a></li>
       <% if (utenteLoggato == null) { %>
