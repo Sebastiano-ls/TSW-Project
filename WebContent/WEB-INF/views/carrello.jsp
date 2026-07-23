@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, model.ItemCarrello, org.apache.commons.text.StringEscapeUtils" %>
+<%@ page import="java.util.List, model.ItemCarrello, org.apache.commons.text.StringEscapeUtils, java.util.Locale" %>
 
 <%
     List<ItemCarrello> carrello = (List<ItemCarrello>) session.getAttribute("carrello");
@@ -67,27 +67,27 @@
                             <span class="carrello-date"><%= item.getCrociera().getDataInizio() %> — <%= item.getCrociera().getDataFine() %></span>
                         </span>
 
-                        <span><%= String.format("%.2f", item.getPrezzoApplicato()) %> €</span>
+                        <span><%= String.format(Locale.US, "%.2f", item.getPrezzoApplicato()) %> €</span>
 
-                        <span>
-                            <p id="alert-error">
-                            <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form">
-                                <input type="hidden" name="action" value="updateQuantita">
-                                <input type="hidden" name="index" value="<%= i %>">
-                                <input type="number" name="adulti" value="<%= item.getNumBiglAdu() %>" min="0" max="20" class="carrello-quantita-input" ajax-quantita>
-                            </form>
-                        </span>
-
-                        <p id="alert-error">
                         <span>
                             <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form">
                                 <input type="hidden" name="action" value="updateQuantita">
                                 <input type="hidden" name="index" value="<%= i %>">
-                                <input type="number" name="bambini" value="<%= item.getNumBiglChilds() %>" min="0" max="10" class="carrello-quantita-input" ajax-quantita>
+                                
+                                <div>
+                                    <label>Adulti: </label>
+                                    <input type="number" name="adulti" value="<%= item.getNumBiglAdu() %>" min="0" max="20" class="carrello-quantita-input" ajax-quantita>
+                                </div>
+                                <div>
+                                    <label>Bambini: </label>
+                                    <input type="number" name="bambini" value="<%= item.getNumBiglChilds() %>" min="0" max="10" class="carrello-quantita-input" ajax-quantita>
+                                </div>
+                                
+                                <p class="alert-error"></p>
                             </form>
                         </span>
 
-                        <span><%= String.format("%.2f", item.getTotale()) %> €</span>
+                        <span class="carrello-subtotale"><%= String.format(Locale.US, "%.2f", item.getTotale()) %> €</span>
                         
                         <span>
                             <form action="${pageContext.request.contextPath}/carrello" method="post">
@@ -102,7 +102,7 @@
 
                 <div class="carrello-totale">
                     <span>Totale ordine:</span>
-                    <span class="carrello-totale-valore"><%= String.format("%.2f", totaleCarrello) %> €</span>
+                    <span class="carrello-totale-valore"><%= String.format(Locale.US, "%.2f", totaleCarrello) %> €</span>
                 </div>
 
                 <div class="carrello-checkout">
@@ -114,7 +114,6 @@
 
         <%@ include file="footer.jsp" %>
 
-        //oggetti di appoggio per la funziona JS per la rimozione di oggetti
         <div class="modal-overlay" id="modal">
             <div class="modal-box">
                 <p id="modal-msg"></p>

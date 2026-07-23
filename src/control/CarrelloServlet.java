@@ -8,6 +8,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import javax.sql.DataSource;
+
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -58,8 +61,8 @@ public class CarrelloServlet extends HttpServlet{
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "id crociera non valido");
                     return;
                 }
-                int adulti = parseIntParam(request.getParameter("adu"), 1);
-                int bambini = parseIntParam(request.getParameter("childs"), 0);
+                int adulti = parseIntParam(request.getParameter("adulti"), 1);
+                int bambini = parseIntParam(request.getParameter("bambini"), 0);
 
                 boolean trovato = false;
                 for (ItemCarrello item : carrello) {
@@ -88,7 +91,7 @@ public class CarrelloServlet extends HttpServlet{
                 String xhr = request.getHeader("X-Requested-With");
                 if ("XMLHttpRequest".equals(xhr)) {
                     response.setContentType("application/json");
-                    response.getWriter().write("{\"ok\":true,\"totale\":" + carrello.size() + "}"); //imposta esito dell'operzione di add asincrona e numero di elem. nel carrello
+                    response.getWriter().write("{\"ok\":true,\"totale\":" + carrello.size() + "}");
                     return;
                 }
 
@@ -108,30 +111,60 @@ public class CarrelloServlet extends HttpServlet{
 
             } else if ("updateQuantita".equals(action)) {
                 int index;
+
                 try {
                     index = Integer.parseInt(request.getParameter("index"));
                 } catch (NumberFormatException e) {
+                    if("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))){
+                        response.setContentType("application/json");
+                        response.setCharacterEncoding("UTF-8");
+                        response.getWriter().write("{\"ok\":false,\"errore\":\"indice non valido\"}");
+
+                        return;
+                    }
+
                     response.sendError(HttpServletResponse.SC_BAD_REQUEST, "indice non valido");
                     return;
                 }
+
+                double subtotaleItem = 0.0;
+                boolean rimosso = false;
+
                 if (index >= 0 && index < carrello.size()) {
                     ItemCarrello item = carrello.get(index);
+
                     int adulti = parseIntParam(request.getParameter("adulti"), 0);
                     int bambini = parseIntParam(request.getParameter("bambini"), 0);
-                    if (adulti < 0) adulti = 0;
-                    if (bambini < 0) bambini = 0;
+
+                    if (adulti < 0) 
+                        adulti = 0;
+
+                    if (bambini < 0) 
+                        bambini = 0;
                     
                     item.setNumBiglAdu(adulti);
                     item.setNumBiglChilds(bambini);
+
                     if (item.getNumBiglAdu() == 0 && item.getNumBiglChilds() == 0) {
                         carrello.remove(index);
+                        rimosso = true;
+                    }else{
+                        subtotaleItem = item.getTotale();
                     }
                 }
 
                 String xhr = request.getHeader("X-Requested-With");
                 if ("XMLHttpRequest".equals(xhr)) {
                     response.setContentType("application/json");
-                    response.getWriter().write("{\"ok\":true}");
+                    response.setCharacterEncoding("UTF-8");
+                    
+                    JSONObject json = new JSONObject();
+                    json.put("ok", true);
+                    json.put("totale", calcolaTotaleCarrello(carrello));
+                    json.put("subtotale", String.format("%.2f", subtotaleItem));
+                    json.put("rimosso", rimosso);
+
+                    response.getWriter().print(json.toString());
                     return;
                 }
                 response.sendRedirect(request.getContextPath() + "/carrello");
@@ -155,5 +188,15 @@ public class CarrelloServlet extends HttpServlet{
         } catch (NumberFormatException e) {
             return defaultVal;
         }
+    }
+
+    private String calcolaTotaleCarrello(List<ItemCarrello> carrello) {
+        double totale = 0;
+
+        for (ItemCarrello item : carrello) {
+            totale += item.getTotale();
+        }
+
+        return String.format("%.2f", totale);
     }
 }
