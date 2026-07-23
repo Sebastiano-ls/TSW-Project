@@ -66,6 +66,7 @@ function ajaxUpdateQuantita(input) {
     };
 
     xhr.open(method, url, true);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
     xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
@@ -79,17 +80,18 @@ function ajaxUpdateQuantita(input) {
     xhr.send(bodyString);
 }
 
-window.onload = function() {
-    var quantitaInputs = document.querySelectorAll("[ajax-quantita]");
-
-    for (let i = 0; i < quantitaInputs.length; i++) {
-        quantitaInputs[i].onchange = function() { ajaxUpdateQuantita(this); };
+window.addEventListener('load', function() {
+    var cartForms = document.querySelectorAll("[ajax-quantita]");
+    for (let i = 0; i < cartForms.length; i++) {
+        var inputs = cartForms[i].querySelectorAll("input[type='number']");
+        for (let j = 0; j < inputs.length; j++) {
+            inputs[j].onchange = function() { ajaxUpdateQuantita(cartForms[i]); };
+        }
     }
-};
+});
 
 function createXMLHttpRequest(form){
     var request;
-
     try{
         request = new XMLHttpRequest();
     }catch (e){
@@ -105,6 +107,5 @@ function createXMLHttpRequest(form){
             }
         }
     }
-
     return request;
 }

@@ -51,8 +51,7 @@
                     <div class="carrello-intestazione">
                         <span>prodotto</span>
                         <span>prezzo</span>
-                        <span>adulti</span>
-                        <span>bambini</span>
+                        <span>passeggeri</span>
                         <span>subtotale</span>
                         <span></span>
                     </div>
