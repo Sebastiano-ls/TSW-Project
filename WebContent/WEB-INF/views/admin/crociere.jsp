@@ -60,7 +60,7 @@
                                         <a href="${pageContext.request.contextPath}/admin/crociere?actionAdmin=edit&id=<%= c.getIdCrociera() %>" class="btn-admin-edit">Modifica</a>
                                         <form action="${pageContext.request.contextPath}/admin/crociere" method="post" class="form-inline">
                                             <input type="hidden" name="actionAdmin" value="delete">
-                                            <input type="hidden" name="id" value="<%= c.getIdCrociera() %>">
+                                            <input type="hidden" name="id" value="<%= c.getId() %>">
                                             <button type="button" class="btn-admin-delete" onclick="showModal(this, 'Disattivare questa crociera?')">Disattiva</button>
                                         </form>
                                     </td>

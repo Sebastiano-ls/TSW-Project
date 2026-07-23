@@ -27,7 +27,7 @@
                 <div class="dettaglio-header">
                     <div class="dettaglio-info">
                         <h1><%= StringEscapeUtils.escapeHtml4(d.getNomeCrocieraArchiviato()) %></h1>
-                        <p class="dettaglio-descrizione"><%= StringEscapeUtils.escapeHtml4(d.getDescrizioneArchiviato() != null ? StringEscapeUtils.escapeHtml4(d.getDescrizioneArchiviato()) : "") %></p>
+                        <p class="dettaglio-descrizione"><%= d.getDescrizioneArchiviato() != null ? StringEscapeUtils.escapeHtml4(d.getDescrizioneArchiviato()) : "" %></p>
                         <div class="dettaglio-viaggio">
                             <div class="dettaglio-viaggio-item">
                                 <span class="dettaglio-viaggio-label">partenza</span>

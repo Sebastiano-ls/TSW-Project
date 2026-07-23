@@ -15,7 +15,7 @@
     }
 
     double totaleCarrello = 0;
-    for (CarrelloItem item : carrello) {
+    for (ItemCarrello item : carrello) {
         totaleCarrello += item.getTotale();
     }
 %>
@@ -42,7 +42,7 @@
                             <% for (ItemCarrello item : carrello) { %>
                                 <div class="checkout-item">
                                     <div class="checkout-item-info">
-                                        <strong><%= item.getCrociera().getNomeCrociera() %></strong>
+                                        <strong><%= item.getCrociera().getNome() %></strong>
                                         <span><%= item.getCrociera().getDataInizio() %> — <%= item.getCrociera().getDataFine() %></span>
                                     </div>
 

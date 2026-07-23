@@ -18,7 +18,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title><%= StringEscapeUtils.escapeHtml4(crociera.getNomeCrociera()) %> — S&amp;S Crociere</title>
+        <title><%= StringEscapeUtils.escapeHtml4(crociera.getNome()) %> — S&amp;S Crociere</title>
         <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/style.css">
         <script src="${pageContext.request.contextPath}/scripts/validazione-utente.js" defer></script>
     </head>
@@ -31,12 +31,12 @@
 
                 <div class="dettaglio-header">
                     <div class="dettaglio-img">
-                        <img src="${pageContext.request.contextPath}/images/crociera?id=<%= crociera.getIdCrociera() %>" alt="<%= crociera.getNomeCrociera() %>" class="img">
+                        <img src="${pageContext.request.contextPath}/images/crociera?id=<%= crociera.getId() %>" alt="<%= crociera.getNome() %>" class="img">
                     </div>
 
                     <div class="dettaglio-info">
-                        <h1><%= StringEscapeUtils.escapeHtml4(crociera.getNomeCrociera()) %></h1>
-                        <p class="dettaglio-descrizione"><%= StringEscapeUtils.escapeHtml4(crociera.getDescrizione() != null ? crociera.getDescrizione() : "") %></p>
+                        <h1><%= StringEscapeUtils.escapeHtml4(crociera.getNome()) %></h1>
+                        <p class="dettaglio-descrizione"><%= StringEscapeUtils.escapeHtml4(crociera.getDes() != null ? crociera.getDes() : "") %></p>
                         <div class="dettaglio-viaggio">
                             <div class="dettaglio-viaggio-item">
                                 <span class="dettaglio-viaggio-label">partenza</span>
@@ -60,7 +60,7 @@
 
                         <form action="${pageContext.request.contextPath}/carrello" method="post" class="dettaglio-form" onsubmit="return validateAddToCartForm()">
                             <input type="hidden" name="action" value="addC">
-                            <input type="hidden" name="idCrociera" value="<%= crociera.getIdCrociera() %>">
+                            <input type="hidden" name="idCrociera" value="<%= crociera.getId() %>">
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="adulti">adulti</label>

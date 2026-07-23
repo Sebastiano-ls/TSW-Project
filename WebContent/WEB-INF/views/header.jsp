@@ -4,7 +4,7 @@
 %>
 <nav class="navbar">
   <div class="container">
-    <a href="${pageContext.request.contextPath}/home" class="navbar-brand"><img src="images/S&S_Cruises_Logo.jpeg" alt="S&S Crociere" class="navbar-logo"> S&S Crociere</a>
+    <a href="${pageContext.request.contextPath}/home" class="navbar-brand"><img src="logo.png" alt="S&S Crociere" class="navbar-logo"> S&S Crociere</a>
     <ul class="navbar-nav">
       <li><a href="${pageContext.request.contextPath}/home" class="nav-link">Home</a></li>
       <li><a href="${pageContext.request.contextPath}/home#ricerca" class="nav-link">Prenota ora</a></li>

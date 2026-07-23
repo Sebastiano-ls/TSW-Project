@@ -23,17 +23,17 @@
                 <form action="${pageContext.request.contextPath}/admin/crociere" method="post" enctype="multipart/form-data">
                     <input type="hidden" name="actionAdmin" value="<%= isEdit ? "edit" : "create" %>">
                     <% if (isEdit) { %>
-                        <input type="hidden" name="id" value="<%= crociera.getIdCrociera() %>">
+                        <input type="hidden" name="id" value="<%= crociera.getId() %>">
                     <% } %>
 
                     <div class="form-group">
                         <label for="nomeCrociera">Nome Crociera</label>
-                        <input type="text" name="nomeCrociera" id="nomeCrociera" required value="<%= isEdit ? crociera.getNomeCrociera() : "" %>">
+                        <input type="text" name="nomeCrociera" id="nomeCrociera" required value="<%= isEdit ? crociera.getNome() : "" %>">
                     </div>
 
                     <div class="form-group">
                         <label for="descrizione">Descrizione</label>
-                        <textarea name="descrizione" id="descrizione" rows="4" class="form-textarea"><%= isEdit && crociera.getDescrizione() != null ? crociera.getDescrizione() : "" %></textarea>
+                        <textarea name="descrizione" id="descrizione" rows="4" class="form-textarea"><%= isEdit && crociera.getDes() != null ? crociera.getDes() : "" %></textarea>
                     </div>
 
                     <div class="riga-form">
@@ -63,7 +63,7 @@
                     <div class="form-group">
                         <label for="immagineCrociera">Immagine</label>
                         <% if (isEdit && crociera.getImmagineCrociera() != null) { %>
-                            <img src="${pageContext.request.contextPath}/images/crociera?id=<%= crociera.getIdCrociera() %>" alt="anteprima" class="image-preview">
+                            <img src="${pageContext.request.contextPath}/images/crociera?id=<%= crociera.getId() %>" alt="anteprima" class="image-preview">
                             <small class="testo-sfumato text-small">lascia vuoto per mantenere l'immagine attuale</small>
                         <% } %>
                         <input type="file" name="immagineCrociera" id="immagineCrociera" accept="image/*">
