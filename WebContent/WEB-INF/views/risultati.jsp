@@ -30,11 +30,11 @@
                 %>
                 <div class="offerta">
                     <div class="offerta-img catalogo-img">
-                        <img src="${pageContext.request.contextPath}/images/crociera?id=<%= StringEscapeUtils.escapeHtml4(c.getIdCrociera()) %>" alt="<%= c.getNomeCrociera() %>" class="img">
+                        <img src="${pageContext.request.contextPath}/images/crociera?id=<%= StringEscapeUtils.escapeHtml4(c.getId()) %>" alt="<%= c.getNome() %>" class="img">
                     </div>
                     <div class="offerta-body">
-                        <h3><%= StringEscapeUtils.escapeHtml4(c.getNomeCrociera()) %></h3>
-                        <p><%= StringEscapeUtils.escapeHtml4(c.getDescrizione() != null ? StringEscapeUtils.escapeHtml4(c.getDescrizione()) : "") %></p>
+                        <h3><%= StringEscapeUtils.escapeHtml4(c.getNome()) %></h3>
+                        <p><%= StringEscapeUtils.escapeHtml4(c.getDes() != null ? StringEscapeUtils.escapeHtml4(c.getDes()) : "") %></p>
                         <p class="offerta-date"><%= c.getDataInizio() %> — <%= c.getDataFine() %></p>
                         <% if (c.getSconto() > 0) { %>
                             <p class="offerta-prezzo">
@@ -45,7 +45,7 @@
                             <p class="offerta-prezzo"><%= String.format("%.2f", c.getPrezzo()) %> € <small>a persona</small></p>
                         <% } %>
                         <div class="offerta-footer">
-                            <a href="${pageContext.request.contextPath}/catalogo/dettaglio?id=<%= c.getIdCrociera() %>" class="btn btn-outline btn-sm">Dettagli</a>
+                            <a href="${pageContext.request.contextPath}/catalogo/dettaglio?id=<%= c.getId() %>" class="btn btn-outline btn-sm">Dettagli</a>
                         </div>
                     </div>
                 </div>

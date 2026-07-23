@@ -34,7 +34,7 @@
                 </div>
                 <% } else {
                     double totaleCarrello = 0;
-                    for (CarrelloItem item : carrello) {
+                    for (ItemCarrello item : carrello) {
                         totaleCarrello += item.getTotale();
                     }
                 %>
@@ -63,7 +63,7 @@
 
                     <div class="carrello-riga" riga-index="<%= i %>">
                         <span class="carrello-col-prodotto">
-                            <strong><%= StringEscapeUtils.escapeHtml4(item.getCrociera().getNomeCrociera()) %></strong>
+                            <strong><%= StringEscapeUtils.escapeHtml4(item.getCrociera().getNome()) %></strong>
                             <span class="carrello-date"><%= item.getCrociera().getDataInizio() %> — <%= item.getCrociera().getDataFine() %></span>
                         </span>
 
