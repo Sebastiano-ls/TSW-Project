@@ -54,6 +54,9 @@
                                     <td class="admin-td"><img src="${pageContext.request.contextPath}/images/crociera?id=<%= c.getId() %>" alt="" onerror="this.style.display='none'"></td>
                                     <td class="admin-td"><%= c.isAttivo() ? "Attivo" : "Non Attivo" %></td>
                                     <td class="admin-td">
+                                        <a href="${pageContext.request.contextPath}/admin/crociera-tappe?actionAdmin=manage&id=<%= c.getIdCrociera() %>" class="btn-admin-edit">Gestisci Tappe</a>
+                                    </td>
+                                    <td class="admin-td">
                                         <a href="${pageContext.request.contextPath}/admin/crociere?actionAdmin=edit&id=<%= c.getIdCrociera() %>" class="btn-admin-edit">Modifica</a>
                                         <form action="${pageContext.request.contextPath}/admin/crociere" method="post" class="form-inline">
                                             <input type="hidden" name="actionAdmin" value="delete">
