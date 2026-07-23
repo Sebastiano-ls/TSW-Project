@@ -1,0 +1,11 @@
+@media(max-width:768px) and (orientation:portrait){
+.griglia-offerte{grid-template-columns:repeat(2,1fr)}
+.griglia-dest{grid-template-columns:repeat(2,1fr)}
+.profilo-griglia,.form-row{grid-template-columns:1fr}
+.dettaglio-header,.checkout-griglia{grid-template-columns:1fr}
+.dettaglio-img{min-height:180px}
+.dettaglio-info{padding:20px}
+.carrello-intestazione{display:none}
+.carrello-riga{grid-template-columns:1fr 1fr;gap:4px;padding:12px}
+.griglia-footer{grid-template-columns:1fr 1fr}
+}

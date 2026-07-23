@@ -18,7 +18,7 @@
 
     <div class="admin-page profile-page">
         <div class="container">
-            <div class="profile-header">
+            <div class="header-profilo">
                 <h1>Pannello Admin</h1>
                 <p>Benvenuto, <%= utente.getNome() %>. Gestisci crociere, ordini e utenti.</p>
             </div>

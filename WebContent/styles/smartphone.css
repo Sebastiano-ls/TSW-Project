@@ -1,0 +1,5 @@
+@media(max-width:480px){
+.griglia-offerte,.griglia-footer,.griglia-dest{grid-template-columns:1fr}
+.ordini-intestazione{display:none}
+.ordini-riga{grid-template-columns:1fr 1fr;gap:4px;padding:12px}
+}

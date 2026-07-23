@@ -113,8 +113,7 @@ public class AdminCrocieraServlet extends HttpServlet{
                     p = 0;
                 bean.setPrezzo(p);
             } catch (NumberFormatException e) {
-                request.setAttribute("errors", "Il prezzo inserito non è un numero valido");
-                request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
+                throw new ServletException("Il prezzo inserito non è un numero valido");
             }
         }
 
@@ -131,8 +130,7 @@ public class AdminCrocieraServlet extends HttpServlet{
 
                 bean.setSconto(s);
             } catch (NumberFormatException e) { 
-                request.setAttribute("errors", "Lo sconto inserito non è valido");
-                request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
+                throw new ServletException("Lo sconto inserito non è valido");
             }
         }
 
@@ -152,8 +150,7 @@ public class AdminCrocieraServlet extends HttpServlet{
                 bean.setMimeType(contentType);
             }
         } catch (ServletException e) {
-            request.setAttribute("errors", "Problemi con il caricamento dell'immagine");
-            request.getRequestDispatcher("/WEB-INF/views/admin/dashboard.jsp").forward(request, response);
+            throw new ServletException("Problemi con il caricamento dell'immagine");
         }
 
         return bean;

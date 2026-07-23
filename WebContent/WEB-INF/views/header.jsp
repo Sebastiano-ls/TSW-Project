@@ -4,11 +4,11 @@
 %>
 <nav class="navbar">
   <div class="container">
-    <a href="${pageContext.request.contextPath}/home" class="navbar-brand"><img src="logo.png" alt="S&S Crociere" class="navbar-logo"> S&S Crociere</a>
+    <a href="${pageContext.request.contextPath}/home" class="navbar-brand"><img src="${pageContext.request.contextPath}/images/logo.png" alt="S&S Crociere" class="navbar-logo"> S&S Crociere</a>
     <ul class="navbar-nav">
       <li><a href="${pageContext.request.contextPath}/home" class="nav-link">Home</a></li>
       <li><a href="${pageContext.request.contextPath}/home#ricerca" class="nav-link">Prenota ora</a></li>
-      <li><a href="${pageContext.request.contextPath}/catalogo?action=recenti" class="nav-link">Catalogo</a></li>
+      <li><a href="${pageContext.request.contextPath}/catalogo" class="nav-link">Catalogo</a></li>
       <li><a href="${pageContext.request.contextPath}/carrello" class="nav-link">Carrello</a></li>
       <% if (utenteLoggato == null) { %>
         <li class="dropdown">
@@ -26,7 +26,7 @@
                 <input type="password" name="password" id="login-password" placeholder="la tua password" required>
               </div>
 
-              <button type="submit" class="btn btn-primary btn-sm">Accedi</button>
+               <button type="submit" class="btn btn-sm">Accedi</button>
 
               <div class="dropdown-register-link">
                 Non hai un account? <a href="${pageContext.request.contextPath}/register">Registrati</a>

@@ -44,7 +44,7 @@
         </div>
 
         <div class="form-azione">
-          <button type="submit" class="btn btn-primary"><%= isEdit ? "Salva Modifiche" : "Crea Tappa" %></button>
+          <button type="submit" class="btn"><%= isEdit ? "Salva Modifiche" : "Crea Tappa" %></button>
           <a href="${pageContext.request.contextPath}/admin/tappe" class="btn btn-outline">Annulla</a>
         </div>
       </form>

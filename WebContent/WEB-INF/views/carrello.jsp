@@ -30,7 +30,7 @@
                 <% if (carrello == null || carrello.isEmpty()) { %>
                 <div class="carrello-vuoto">
                     <p>Il carrello è vuoto</p>
-                    <a href="${pageContext.request.contextPath}/catalogo" class="btn btn-primary">Sfoglia il catalogo</a>
+                    <a href="${pageContext.request.contextPath}/catalogo" class="btn">Sfoglia il catalogo</a>
                 </div>
                 <% } else {
                     double totaleCarrello = 0;
@@ -49,12 +49,12 @@
 
                 <div class="carrello-tabella">
                     <div class="carrello-intestazione">
-                        <span class="carrello-col-prodotto">prodotto</span>
-                        <span class="carrello-col-prezzo">prezzo</span>
-                        <span class="carrello-col-adulti">adulti</span>
-                        <span class="carrello-col-bambini">bambini</span>
-                        <span class="carrello-col-subtotale">subtotale</span>
-                        <span class="carrello-col-azione"></span>
+                        <span>prodotto</span>
+                        <span>prezzo</span>
+                        <span>adulti</span>
+                        <span>bambini</span>
+                        <span>subtotale</span>
+                        <span></span>
                     </div>
 
                     <% for (int i = 0; i < carrello.size(); i++) {
@@ -62,14 +62,14 @@
                     %>
 
                     <div class="carrello-riga" riga-index="<%= i %>">
-                        <span class="carrello-col-prodotto">
+                        <span>
                             <strong><%= StringEscapeUtils.escapeHtml4(item.getCrociera().getNome()) %></strong>
                             <span class="carrello-date"><%= item.getCrociera().getDataInizio() %> — <%= item.getCrociera().getDataFine() %></span>
                         </span>
 
-                        <span class="carrello-col-prezzo"><%= String.format("%.2f", item.getPrezzoApplicato()) %> €</span>
+                        <span><%= String.format("%.2f", item.getPrezzoApplicato()) %> €</span>
 
-                        <span class="carrello-col-adulti">
+                        <span>
                             <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form">
                                 <input type="hidden" name="action" value="updateQuantita">
                                 <input type="hidden" name="index" value="<%= i %>">
@@ -77,7 +77,7 @@
                             </form>
                         </span>
 
-                        <span class="carrello-col-bambini">
+                        <span>
                             <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form">
                                 <input type="hidden" name="action" value="updateQuantita">
                                 <input type="hidden" name="index" value="<%= i %>">
@@ -85,9 +85,9 @@
                             </form>
                         </span>
 
-                        <span class="carrello-col-subtotale carrello-subtotale-<%= i %>"><%= String.format("%.2f", item.getTotale()) %> €</span>
+                        <span><%= String.format("%.2f", item.getTotale()) %> €</span>
                         
-                        <span class="carrello-col-azione">
+                        <span>
                             <form action="${pageContext.request.contextPath}/carrello" method="post">
                                 <input type="hidden" name="action" value="deleteC">
                                 <input type="hidden" name="index" value="<%= i %>">
@@ -104,7 +104,7 @@
                 </div>
 
                 <div class="carrello-checkout">
-                    <a href="${pageContext.request.contextPath}/common/checkout" class="btn btn-primary">Procedi al checkout</a>
+                    <a href="${pageContext.request.contextPath}/common/checkout" class="btn">Procedi al checkout</a>
                 </div>
                 <% } %>
             </div>

@@ -31,7 +31,7 @@
 
                 <div class="dettaglio-header">
                     <div class="dettaglio-img">
-                        <img src="${pageContext.request.contextPath}/images/crociera?id=<%= crociera.getId() %>" alt="<%= crociera.getNome() %>" class="img">
+                        <img src="${pageContext.request.contextPath}/images/crociera?id=<%= crociera.getId() %>" alt="<%= crociera.getNome() %>">
                     </div>
 
                     <div class="dettaglio-info">
@@ -71,7 +71,7 @@
                                     <input type="number" name="bambini" id="bambini" value="0" min="0" max="3">
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">Aggiungi al carrello</button>
+                            <button type="submit" class="btn">Aggiungi al carrello</button>
                         </form>
                     </div>
                 </div>

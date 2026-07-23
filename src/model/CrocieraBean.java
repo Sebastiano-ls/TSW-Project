@@ -11,8 +11,8 @@ public class CrocieraBean implements Serializable{
     private String des;
     private Date dataIn;
     private Date dataFin;
-    private double prezzo;
-    private double sconto;
+    private double prezzo = -1;
+    private double sconto = -1;
     private byte[] immagineCrociera;
     private String immagineTipo;
     private boolean attivo;

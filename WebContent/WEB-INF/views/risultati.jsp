@@ -30,7 +30,7 @@
                 %>
                 <div class="offerta">
                     <div class="offerta-img catalogo-img">
-                        <img src="${pageContext.request.contextPath}/images/crociera?id=<%= StringEscapeUtils.escapeHtml4(c.getId()) %>" alt="<%= c.getNome() %>" class="img">
+                        <img src="${pageContext.request.contextPath}/images/crociera?id=<%= c.getId() %>" alt="<%= c.getNome() %>">
                     </div>
                     <div class="offerta-body">
                         <h3><%= StringEscapeUtils.escapeHtml4(c.getNome()) %></h3>

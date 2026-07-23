@@ -39,7 +39,7 @@
                 <% 
                 } %>
 
-                <a href="${pageContext.request.contextPath}/home" class="btn btn-primary error-btn">Torna alla Home</a>
+                <a href="${pageContext.request.contextPath}/home" class="btn error-btn">Torna alla Home</a>
             </div>
         </section>
 

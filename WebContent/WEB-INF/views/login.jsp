@@ -14,7 +14,7 @@
     <%@ include file="header.jsp" %>
 
     <div class="form-page">
-        <div class="form-card">
+        <div class="form">
             <h2>Accedi</h2>
 
 <% if (request.getAttribute("error") != null) { %>
@@ -35,7 +35,7 @@
                 </div>
 
                 <div class="form-azione">
-                    <button type="submit" class="btn btn-primary">Accedi</button>
+                    <button type="submit" class="btn">Accedi</button>
                 </div>
 
                 <div class="form-footer">

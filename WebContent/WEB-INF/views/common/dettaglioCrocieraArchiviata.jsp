@@ -22,7 +22,7 @@
 
         <section class="section">
             <div class="container">
-                <a href="${pageContext.request.contextPath}/ordini" class="btn btn-outline btn-sm mb-20">&larr; Torna agli ordini</a>
+                <a href="${pageContext.request.contextPath}/common/ordini" class="btn btn-outline btn-sm mb-20">&larr; Torna agli ordini</a>
 
                 <div class="dettaglio-header">
                     <div class="dettaglio-info">
@@ -52,7 +52,7 @@
                         <% for (int i = 0; i < tappe.length; i++) { %>
                         <div class="tappa-item">
                             <div class="tappa-marker"></div>
-                            <div class="tappa-content">
+                            <div class="contenuto-tappa">
                                 <span class="tappa-nome"><%= StringEscapeUtils.escapeHtml4(tappe[i]) %></span>
                             </div>
                         </div>

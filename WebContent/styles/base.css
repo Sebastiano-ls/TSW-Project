@@ -1,0 +1,208 @@
+/* ========== BASE DEL CSS ========== */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:Arial,sans-serif;background:whitesmoke;color:black;display:flex;flex-direction:column}
+a{color:navy;text-decoration:none}
+a:hover{color:gold}
+img{max-width:100%}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+/* ========== BARRA DI NAVIGAZIONE E MENU A TENDINA ========== */
+.navbar{background:navy;padding:0 20px}
+.navbar .container{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0}
+.navbar-brand{display:flex;align-items:center;gap:8px;font-size:1.2rem;font-weight:bold;color:white}
+.navbar-logo{height:36px;width:auto}
+.navbar-nav{display:flex;list-style:none;gap:4px;align-self:stretch}
+.navbar-nav li{display:flex;align-items:center}
+.navbar-nav .nav-link{display:flex;align-items:center;color:rgba(255,255,255,.85);padding:8px 14px;font-size:.82rem}
+.navbar-nav .nav-link:hover{background:rgba(255,255,255,.1);color:white}
+.dropdown{position:relative}
+.dropdown-button{display:flex;align-items:center;color:rgba(255,255,255,.85);padding:8px 14px;font-size:.82rem;background:none;border:none;cursor:pointer;font-family:inherit}
+.dropdown-menu{position:absolute;top:100%;right:0;background:white;border:1px solid lightgray;min-width:250px;display:none;z-index:1001}
+.dropdown:hover .dropdown-menu{display:block}
+.dropdown-menu a{display:block;padding:9px 16px;color:black;font-size:.85rem}
+.dropdown-menu a:hover{background:whitesmoke;color:navy}
+.dropdown-menu-header{padding:12px 16px 8px;font-size:.65rem;color:gray;text-transform:uppercase}
+.dropdown-divider{height:1px;background:gainsboro;margin:4px 0}
+.dropdown-login-form{padding:12px 16px}
+.form-div{margin-bottom:8px}
+.form-div label{display:block;font-size:.75rem;font-weight:bold;color:gray;margin-bottom:2px}
+.form-div input{width:100%;padding:6px 8px;border:1px solid lightgray;font-size:.82rem;font-family:inherit}
+
+/* ========== BANNER ========== */
+.hero{background:navy;color:white;padding:80px 20px 60px;text-align:center}
+.hero h1{font-size:2rem;margin-bottom:8px}
+.hero h1 span{color:gold}
+.hero p{margin-bottom:28px}
+.hero-search{display:flex;background:white;max-width:600px;margin:0 auto}
+.hero-search select,
+.hero-search input{flex:1;padding:12px 14px;border:none;font-size:.85rem}
+.hero-search button{padding:12px 24px;background:gold;color:white;border:none;cursor:pointer;font-size:.85rem;font-weight:bold}
+.divisore-ricerca{width:1px;height:24px;background:lightgray;flex-shrink:0}
+
+/* ========== SEZIONI E GRIGLIE ========== */
+.section{padding:48px 20px}
+.sezione-bianca{background:white}
+.section h2{font-size:1.5rem;color:navy;text-align:center;margin-bottom:6px}
+.section .sottotitolo{text-align:center;color:gray;font-size:.88rem;margin-bottom:32px}
+.griglia-offerte{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.offerta{background:white;border:1px solid lightgray}
+.offerta-img{height:160px;display:flex;align-items:center;justify-content:center;font-size:2.5rem;background:lavender}
+.catalogo-img{height:160px}
+.offerta-body{padding:20px}
+.offerta-body h3{color:navy}
+.offerta-prezzo{font-size:1.2rem;font-weight:bold;color:gold}
+.offerta-date{color:gray;font-size:.82rem}
+.offerta-footer{margin-top:12px}
+.prezzo-originale{text-decoration:line-through;font-size:.9rem;color:gray}
+.griglia-dest{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card-dest{border:1px solid lightgray;padding:24px 12px;text-align:center}
+.card-dest h4{color:navy}
+.card-dest-icon{font-size:2rem;display:block;margin-bottom:8px}
+.img{width:100%;height:100%;object-fit:cover}
+.img-fallback{font-size:2.5rem}
+.hidden{display:none!important}
+
+/* ========== PULSANTI ========== */
+.btn{display:inline-block;padding:8px 20px;font-size:.82rem;font-weight:bold;border:none;cursor:pointer;font-family:inherit;text-align:center;color:white;background:navy}
+.btn:hover{background:gold}
+.btn-outline{background:transparent;color:navy;border:1.5px solid navy}
+.btn-outline:hover{background:navy;color:white}
+.btn-danger{background:red}
+.btn-danger:hover{background:darkred}
+.btn-sm{padding:6px 14px;font-size:.75rem}
+.btn-block{display:block;width:100%}
+.btn-link-block{display:inline-block}
+.btn-admin-create{padding:8px 16px;background:navy;color:white;font-size:.82rem;display:inline-block}
+.btn-admin-edit{padding:4px 10px;background:navy;color:white;font-size:.75rem;display:inline-block}
+.btn-admin-delete{padding:4px 10px;background:red;color:white;font-size:.75rem;border:none;cursor:pointer;font-family:inherit}
+
+/* ========== FORMS ========== */
+.form-page{display:flex;justify-content:center;padding:60px 20px;flex:1}
+.form{background:white;border:1px solid lightgray;padding:36px;width:100%;max-width:440px}
+.form h2{color:navy;text-align:center;margin-bottom:20px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.78rem;font-weight:bold;color:navy;margin-bottom:4px}
+.form-group input,
+.form-group select{width:100%;padding:9px 12px;border:1px solid lightgray;font-size:.88rem;font-family:inherit}
+.form-group-min{margin-bottom:8px}
+.form-textarea{width:100%;padding:9px 12px;border:1px solid lightgray;font-size:.88rem;font-family:inherit;resize:vertical}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-azione{margin-top:20px}
+.form-azione .btn{width:100%;padding:10px}
+.form-footer{text-align:center;margin-top:16px;color:gray}
+.form-grande{max-width:600px}
+.riga-form-azione{display:flex;gap:10px;align-items:center}
+.form-inline{display:inline}
+.image-preview{max-width:200px;border:1px solid lightgray}
+
+/* ========== TABELLE E ADMIN ========== */
+.admin-page{padding:40px 20px;flex:1}
+.admin-table{width:100%;border-collapse:collapse;background:white}
+.admin-table th{background:navy;color:white;padding:12px 16px;text-align:left}
+.admin-table td{padding:12px 16px;border-bottom:1px solid gainsboro}
+.admin-tr{background:white}
+.admin-tr-alt{background:whitesmoke}
+.wrapper-tabella{padding:0;overflow-x:auto}
+.stato-vuoto{text-align:center;color:gray;padding:20px}
+.dashboard{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.dashboard-stat{font-size:2rem;font-weight:bold;color:navy;text-align:center}
+.dashboard-label{display:block;font-size:.82rem;color:gray;text-align:center;margin-top:4px}
+.testo-sfumato{color:gray;font-size:.85rem}
+.text-small{font-size:.78rem;color:gray}
+
+/* ========== CARRELLO ========== */
+.carrello-tabella{background:white;border:1px solid lightgray}
+.carrello-intestazione{display:grid;grid-template-columns:2fr 1fr 80px 80px 1fr 80px;gap:8px;padding:12px 20px;background:navy;color:white;font-size:.72rem;text-transform:uppercase}
+.carrello-riga{display:grid;grid-template-columns:2fr 1fr 80px 80px 1fr 80px;gap:8px;padding:16px 20px;align-items:center;border-bottom:1px solid whitesmoke}
+.carrello-azioni-alto{display:flex;justify-content:space-between;margin-bottom:16px}
+.carrello-vuoto{text-align:center;padding:60px 20px;color:gray}
+.carrello-date{display:block;font-size:.82rem;color:gray}
+.carrello-quantita-form{display:inline}
+.carrello-quantita-input{width:60px;padding:5px 6px;border:1px solid lightgray;font-family:inherit;font-size:.82rem;text-align:center}
+.carrello-totale{display:flex;justify-content:flex-end;gap:16px;padding:20px}
+.carrello-totale-valore{font-weight:bold;color:gold}
+.carrello-checkout{text-align:right;padding:0 20px 20px}
+
+/* ========== ORDINI ========== */
+.ordini-tabella{background:white;border:1px solid lightgray}
+.ordini-intestazione{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:12px 20px;background:navy;color:white;font-size:.72rem;text-transform:uppercase}
+.ordini-riga{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;padding:14px 20px;border-bottom:1px solid whitesmoke}
+
+/* ========== CHECKOUT ========== */
+.checkout-griglia{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.checkout-riepilogo,
+.checkout-form{background:white;border:1px solid lightgray;padding:24px}
+.checkout-riepilogo h3,
+.checkout-form h3{color:navy;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid lightgray}
+.checkout-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid whitesmoke}
+.checkout-item-info{display:flex;flex-direction:column}
+.checkout-item-quantita{font-size:.82rem;color:gray}
+.checkout-item-prezzo{font-weight:bold;color:black}
+.checkout-items{display:flex;flex-direction:column}
+.checkout-totale{display:flex;justify-content:space-between;padding-top:12px;font-size:1.1rem;font-weight:bold;color:gold}
+.checkout-utente-info p{margin-bottom:4px}
+.checkout-conferma{font-size:.82rem;color:gray;margin:16px 0}
+.checkout-back{margin-top:12px}
+
+/* ========== DETTAGLIO ========== */
+.dettaglio-header{display:grid;grid-template-columns:300px 1fr;gap:32px;background:white;border:1px solid lightgray;margin-bottom:32px}
+.dettaglio-img{background:lavender;display:flex;align-items:center;justify-content:center;font-size:4rem;min-height:250px}
+.dettaglio-info{padding:28px 28px 28px 0}
+.dettaglio-info h1{color:navy;margin-bottom:8px}
+.dettaglio-descrizione{margin-bottom:16px}
+.dettaglio-prezzo{font-size:1.5rem;font-weight:bold;color:gold}
+.dettaglio-sconto{display:inline-block;background:red;color:white;padding:2px 8px;font-size:.82rem;margin-left:8px}
+.dettaglio-viaggio{display:flex;gap:24px;margin-bottom:16px}
+.dettaglio-viaggio-item{display:flex;flex-direction:column}
+.dettaglio-viaggio-label{font-size:.72rem;text-transform:uppercase;color:gray}
+.dettaglio-viaggio-value{font-size:1rem;font-weight:bold}
+.dettaglio-form{margin-top:20px}
+.dettaglio-tappe{margin-top:32px}
+.dettaglio-tappe h3{color:navy;margin-bottom:16px}
+.tappe{display:flex;flex-direction:column}
+.tappa-item{display:flex;gap:16px;padding:12px 0;border-left:2px solid navy;padding-left:20px}
+.tappa-marker{width:12px;height:12px;background:navy;border-radius:50%;margin-top:4px;flex-shrink:0}
+.contenuto-tappa{display:flex;flex-direction:column}
+.tappa-nome{font-weight:bold;color:navy}
+.tappa-porto{font-size:.82rem;color:gray}
+
+/* ========== PROFILO ========== */
+.profile-page{padding:40px 20px;flex:1}
+.header-profilo h1{color:navy;margin-bottom:20px}
+.profilo-griglia{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.profilo{background:white;border:1px solid lightgray;padding:24px}
+.profilo h2{font-size:.85rem;text-transform:uppercase;color:navy;margin-bottom:16px;padding-bottom:8px;border-bottom:2px solid lavender}
+.riga-profilo{display:flex;padding:8px 0;border-bottom:1px solid whitesmoke;align-items:center}
+.label-profilo{width:130px;color:gray;flex-shrink:0;font-size:.85rem}
+.input-profilo{flex:1;padding:6px 10px;border:1px solid lightgray;font-size:.85rem;font-family:inherit}
+.azioni-profilo{margin-top:16px}
+
+/* ========== JAVASCRIPT MODAL ========== */
+.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;z-index:1000}
+.modal-box{background:white;border:1px solid lightgray;padding:28px 32px 24px;max-width:400px;width:90%;text-align:center}
+.modal-azioni{display:flex;gap:12px;justify-content:center;margin-top:20px}
+
+/* ========== FOOTER ========== */
+.footer{background:navy;color:rgba(255,255,255,.7);padding:40px 20px 20px;margin-top:auto}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:32px;max-width:1100px;margin:0 auto}
+.footer-col h4{display:flex;align-items:center;gap:8px;color:white;margin-bottom:16px}
+.footer-logo{height:28px;width:auto}
+.footer-col a{display:block;color:rgba(255,255,255,.55);padding:4px 0}
+.footer-col a:hover{color:gold}
+.footer-bottom{max-width:1100px;margin:32px auto 0;padding-top:16px;border-top:1px solid rgba(255,255,255,.08);text-align:center;font-size:.72rem;color:rgba(255,255,255,.35)}
+
+/* ========== ALERTS, VALIDATION ED UTILITIES VARIE ========== */
+.alert{padding:10px 14px;margin-bottom:16px;border:1px solid lightgray}
+.alert-error{background:mistyrose;color:red}
+.alert-success{background:honeydew;color:darkgreen}
+.input-error{border-color:red!important;background:snow}
+.input-valid{border-color:mediumseagreen!important}
+.error-message{display:block;font-size:.72rem;color:red;margin-top:3px}
+.vuoto{text-align:center;padding:40px 20px;color:gray}
+.error-container{text-align:center;padding:60px 20px}
+.error-code{font-size:4rem;color:navy}
+.error-heading{color:black;margin-bottom:12px}
+.error-btn{margin-top:24px}
+.mb-20{margin-bottom:20px}
+.mt-20{margin-top:20px}

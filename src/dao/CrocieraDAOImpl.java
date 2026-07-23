@@ -142,7 +142,9 @@ public class CrocieraDAOImpl implements CrocieraDAO{
 
         if(destinazione!=null){
             parametri.add("%" + destinazione + "%");
-            sql = sql + " AND t.nome_tappa LIKE ?";
+            parametri.add("%" + destinazione + "%");
+            parametri.add("%" + destinazione + "%");
+            sql = sql + " AND (c.nome_crociera LIKE ? OR c.descrizione LIKE ? OR t.nome_tappa LIKE ?)";
         }
 
         if(partenza!=null){

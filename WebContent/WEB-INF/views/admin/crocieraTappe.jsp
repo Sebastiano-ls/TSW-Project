@@ -21,9 +21,9 @@
 
         <div class="admin-page profile-page">
             <div class="container">
-                <div class="profile-header">
+                <div class="header-profilo">
                     <h1>Tappe Crociera</h1>
-                    <p>Gestisci le tappe per: <strong><%= crociera != null ? crociera.getNomeCrociera() : "?" %></strong></p>
+                    <p>Gestisci le tappe per: <strong><%= crociera != null ? crociera.getNome() : "?" %></strong></p>
                     <a href="${pageContext.request.contextPath}/admin/crociere" class="btn btn-outline btn-sm">&larr; Torna alle crociere</a>
                 </div>
 
@@ -33,21 +33,21 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th class="admin-th">Località</th>
-                                <th class="admin-th">Porto</th>
-                                <th class="admin-th">Azioni</th>
+                                <th>Località</th>
+                                <th>Porto</th>
+                                <th>Azioni</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <% for (TappaBean t : tappeAssociate) { %>
                             <tr>
-                                <td class="admin-td"><%= t.getLocalita() %></td>
-                                <td class="admin-td"><%= t.getPorto() %></td>
-                                <td class="admin-td">
+                                <td><%= t.getLocalita() %></td>
+                                <td><%= t.getPorto() %></td>
+                                <td>
                                     <form action="${pageContext.request.contextPath}/admin/crociera-tappe" method="post" class="form-inline">
                                         <input type="hidden" name="actionAdmin" value="remove">
-                                        <input type="hidden" name="idCrociera" value="<%= crociera.getIdCrociera() %>">
+<input type="hidden" name="idCrociera" value="<%= crociera.getId() %>">
                                         <input type="hidden" name="idTappa" value="<%= t.getId() %>">
                                         <button type="button" class="btn-admin-delete" onclick="showModal(this, 'Rimuovere questa tappa?')">Rimuovi</button>
                                     </form>
@@ -63,9 +63,9 @@
 
                 <div class="profilo">
                     <h2>Aggiungi Tappa</h2>
-                    <form action="${pageContext.request.contextPath}/admin/crociera-tappe" method="post" class="riga-form-azioni">
+                    <form action="${pageContext.request.contextPath}/admin/crociera-tappe" method="post" class="riga-form-azione">
                         <input type="hidden" name="actionAdmin" value="add">
-                        <input type="hidden" name="idCrociera" value="<%= crociera.getIdCrociera() %>">
+                        <input type="hidden" name="idCrociera" value="<%= crociera.getId() %>">
                         <div class="form-group form-group-min">
                             <label for="idTappa">Tappa</label>
                             <select name="idTappa" id="idTappa">
@@ -92,7 +92,7 @@
                             <input type="date" name="dataSosta" id="dataSosta" required>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary btn-sm mt-20">Aggiungi</button>
+                        <button type="submit" class="btn btn-sm mt-20">Aggiungi</button>
                     </form>
                 </div>
             </div>

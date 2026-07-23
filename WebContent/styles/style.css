@@ -1,0 +1,4 @@
+@import url("base.css");
+@import url("tablet-landscape.css") (max-width: 1024px) and (orientation: landscape);
+@import url("tablet-portrait.css") (max-width: 768px) and (orientation: portrait);
+@import url("smartphone.css") (max-width: 480px);

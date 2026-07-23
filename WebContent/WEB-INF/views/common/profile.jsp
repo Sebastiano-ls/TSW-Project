@@ -31,7 +31,7 @@
                 
                 <div class="profilo">
                     <h2>Dati Personali</h2>
-                    <form action="${pageContext.request.contextPath}/profile" method="post" onsubmit="return validateProfileInfo()">
+                    <form action="${pageContext.request.contextPath}/common/profile" method="post" onsubmit="return validateProfileInfo()">
                         <input type="hidden" name="action" value="updateInfo">
 
                         <div class="riga-profilo">
@@ -70,7 +70,7 @@
                         </div>
 
                         <div class="azioni-profilo">
-                            <button type="submit" class="btn btn-primary btn-sm">Salva modifiche</button>
+                            <button type="submit" class="btn btn-sm">Salva modifiche</button>
                         </div>
                     </form>
                 </div>
@@ -78,7 +78,7 @@
                 
                 <div class="profilo">
                     <h2>Cambia Password</h2>
-                    <form action="${pageContext.request.contextPath}/profile" method="post" onsubmit="return validatePasswordForm()">
+                    <form action="${pageContext.request.contextPath}/common/profile" method="post" onsubmit="return validatePasswordForm()">
                         <input type="hidden" name="action" value="updatePassword">
 
                         <div class="riga-profilo">
@@ -97,7 +97,7 @@
                         </div>
 
                         <div class="azioni-profilo">
-                            <button type="submit" class="btn btn-primary btn-sm">Aggiorna Password</button>
+                            <button type="submit" class="btn btn-sm">Aggiorna Password</button>
                         </div>
                     </form>
                 </div>

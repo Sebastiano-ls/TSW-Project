@@ -19,7 +19,7 @@
 
         <div class="admin-page profile-page">
             <div class="container">
-                <div class="profile-header">
+                <div class="header-profilo">
                     <h1>Gestisci Crociere</h1>
                     <p>Elenco delle crociere nel catalogo.</p>
                     <a href="${pageContext.request.contextPath}/admin/crociere?actionAdmin=create" class="btn-admin-create">+ Nuova Crociera</a>
@@ -29,15 +29,15 @@
                     <table class="admin-table">
                         <thead>
                             <tr>
-                                <th class="admin-th">ID</th>
-                                <th class="admin-th">Nome</th>
-                                <th class="admin-th">Inizio</th>
-                                <th class="admin-th">Fine</th>
-                                <th class="admin-th">Prezzo</th>
-                                <th class="admin-th">Sconto</th>
-                                <th class="admin-th">Immagine</th>
-                                <th class="admin-th">Attivo</th>
-                                <th class="admin-th">Azioni</th>
+                                <th>ID</th>
+                                <th>Nome</th>
+                                <th>Inizio</th>
+                                <th>Fine</th>
+                                <th>Prezzo</th>
+                                <th>Sconto</th>
+                                <th>Immagine</th>
+                                <th>Attivo</th>
+                                <th>Azioni</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,19 +45,19 @@
                                 int rowNum = 0; 
                                 for (CrocieraBean c : crociere) { %>
                                 <tr class='<%= rowNum++ % 2 == 0 ? "admin-tr" : "admin-tr-alt" %>'>
-                                    <td class="admin-td"><%= c.getId() %></td>
-                                    <td class="admin-td"><%= StringEscapeUtils.escapeHtml4(c.getNome()) %></td>
-                                    <td class="admin-td"><%= c.getDataInizio() %></td>
-                                    <td class="admin-td"><%= c.getDataFine() %></td>
-                                    <td class="admin-td">€ <%= String.format("%.2f", c.getPrezzo()) %></td>
-                                    <td class="admin-td"><%= String.format("%.0f", c.getSconto()) %>%</td>
-                                    <td class="admin-td"><img src="${pageContext.request.contextPath}/images/crociera?id=<%= c.getId() %>" alt="" onerror="this.style.display='none'"></td>
-                                    <td class="admin-td"><%= c.isAttivo() ? "Attivo" : "Non Attivo" %></td>
-                                    <td class="admin-td">
-                                        <a href="${pageContext.request.contextPath}/admin/crociera-tappe?actionAdmin=manage&id=<%= c.getIdCrociera() %>" class="btn-admin-edit">Gestisci Tappe</a>
+                                    <td><%= c.getId() %></td>
+                                    <td><%= StringEscapeUtils.escapeHtml4(c.getNome()) %></td>
+                                    <td><%= c.getDataInizio() %></td>
+                                    <td><%= c.getDataFine() %></td>
+                                    <td>€ <%= String.format("%.2f", c.getPrezzo()) %></td>
+                                    <td><%= String.format("%.0f", c.getSconto()) %>%</td>
+                                    <td><img src="${pageContext.request.contextPath}/images/crociera?id=<%= c.getId() %>" alt="" onerror="this.style.display='none'"></td>
+                                    <td><%= c.isAttivo() ? "Attivo" : "Non Attivo" %></td>
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/admin/crociera-tappe?actionAdmin=manage&idCrociera=<%= c.getId() %>" class="btn-admin-edit">Gestisci Tappe</a>
                                     </td>
-                                    <td class="admin-td">
-                                        <a href="${pageContext.request.contextPath}/admin/crociere?actionAdmin=edit&id=<%= c.getIdCrociera() %>" class="btn-admin-edit">Modifica</a>
+                                    <td>
+                                        <a href="${pageContext.request.contextPath}/admin/crociere?actionAdmin=edit&id=<%= c.getId() %>" class="btn-admin-edit">Modifica</a>
                                         <form action="${pageContext.request.contextPath}/admin/crociere" method="post" class="form-inline">
                                             <input type="hidden" name="actionAdmin" value="delete">
                                             <input type="hidden" name="id" value="<%= c.getId() %>">
@@ -68,7 +68,7 @@
                             <% } } %>
 
                             <% if (crociere == null || crociere.isEmpty()) { %>
-                                <tr><td colspan="9" class="admin-td stato-vuoto">Nessuna crociera nel catalogo.</td></tr>
+                                <tr><td colspan="9" class="stato-vuoto">Nessuna crociera nel catalogo.</td></tr>
                             <% } %>
                         </tbody>
                     </table>

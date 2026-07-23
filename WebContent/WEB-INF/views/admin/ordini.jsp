@@ -21,13 +21,13 @@
     <div class="admin-page profile-page">
         <div class="container">
             
-            <div class="profile-header">
+            <div class="header-profilo">
                 <h1>Gestisci Ordini</h1>
                 <p>Elenco degli ordini ricevuti. Usa i filtri per restringere la ricerca.</p>
             </div>
 
             <div class="profilo">
-                <form method="get" action="${pageContext.request.contextPath}/admin/ordini" class="form-azioni-riga">
+                <form method="get" action="${pageContext.request.contextPath}/admin/ordini" class="riga-form-azione">
                     <div class="form-group">
                         <label for="daData">Da data</label>
                         <input type="date" name="daData" id="daData" 
@@ -46,7 +46,7 @@
                                value="<%= email != null ? StringEscapeUtils.escapeHtml4(email) : "" %>">
                     </div>
                     
-                    <button type="submit" class="btn btn-primary btn-sm">Filtra</button>
+                    <button type="submit" class="btn btn-sm">Filtra</button>
                     <a href="${pageContext.request.contextPath}/admin/ordini" class="btn btn-outline btn-sm">Reset</a>
                 </form>
             </div>
@@ -56,11 +56,11 @@
                 <table class="admin-table">
                     <thead>
                         <tr>
-                            <th class="admin-th">ID</th>
-                            <th class="admin-th">Cliente</th>
-                            <th class="admin-th">Email</th>
-                            <th class="admin-th">Data</th>
-                            <th class="admin-th">Totale</th>
+                            <th>ID</th>
+                            <th>Cliente</th>
+                            <th>Email</th>
+                            <th>Data</th>
+                            <th>Totale</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,21 +71,21 @@
                                 String rowClass = (rowNum++ % 2 == 0) ? "admin-tr" : "admin-tr-alt";
                     %>
                         <tr class="<%= rowClass %>">
-                            <td class="admin-td">#<%= o.getIdOrdine() %></td>
-                            <td class="admin-td">
+                            <td>#<%= o.getIdOrdine() %></td>
+                            <td>
                                 <%= StringEscapeUtils.escapeHtml4(o.getNomeUtente()) %> 
                                 <%= StringEscapeUtils.escapeHtml4(o.getCognomeUtente()) %>
                             </td>
-                            <td class="admin-td"><%= StringEscapeUtils.escapeHtml4(o.getEmailUtente()) %></td>
-                            <td class="admin-td"><%= o.getDataPagamento() %></td>
-                            <td class="admin-td">€ <%= String.format("%.2f", o.getTotOrdine()) %></td>
+                            <td><%= StringEscapeUtils.escapeHtml4(o.getEmailUtente()) %></td>
+                            <td><%= o.getDataPagamento() %></td>
+                            <td>€ <%= String.format("%.2f", o.getTotOrdine()) %></td>
                         </tr>
                     <% 
                             } 
                         } else { 
                     %>
                         <tr>
-                            <td colspan="5" class="admin-td stato-vuoto">Nessun ordine trovato.</td>
+                            <td colspan="5" class="stato-vuoto">Nessun ordine trovato.</td>
                         </tr>
                     <% 
                         } 

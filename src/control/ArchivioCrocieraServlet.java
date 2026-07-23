@@ -14,13 +14,17 @@ import javax.sql.DataSource;
 
 import dao.DettaglioOrdineDAO;
 import dao.DettaglioOrdineDAOImpl;
+import dao.OrdineDAO;
+import dao.OrdineDAOImpl;
 import model.DettaglioOrdineBean;
+import model.OrdineBean;
 import model.UtenteBean;
 
 @WebServlet("/common/ordini/archivio-crociera")
 public class ArchivioCrocieraServlet extends HttpServlet{
     private static final long serialVersionUID = 1L;
     private DettaglioOrdineDAO dettaglioOrdineDAO;
+    private OrdineDAO ordineDAO;
 
     public void init() throws ServletException {
         DataSource ds = (DataSource) getServletContext().getAttribute("DataSource");
@@ -28,6 +32,7 @@ public class ArchivioCrocieraServlet extends HttpServlet{
             throw new ServletException("DataSource non disponibile nel contesto");
         }
         dettaglioOrdineDAO = new DettaglioOrdineDAOImpl(ds);
+        ordineDAO = new OrdineDAOImpl(ds);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,6 +61,18 @@ public class ArchivioCrocieraServlet extends HttpServlet{
 
             DettaglioOrdineBean dettaglio = dettaglioOrdineDAO.doRetrieveByKey(idDettaglio);
             if (dettaglio == null) {
+                response.sendRedirect(request.getContextPath() + "/common/ordini");
+                return;
+            }
+
+            OrdineBean ordine = ordineDAO.doRetrieveByKey(dettaglio.getIdOrdine());
+            if (ordine == null) {
+                response.sendRedirect(request.getContextPath() + "/common/ordini");
+                return;
+            }
+
+            boolean isAdmin = "admin".equals(utente.getRuolo());
+            if (ordine.getIdUtente() != utente.getIdUtente() && !isAdmin) {
                 response.sendRedirect(request.getContextPath() + "/common/ordini");
                 return;
             }

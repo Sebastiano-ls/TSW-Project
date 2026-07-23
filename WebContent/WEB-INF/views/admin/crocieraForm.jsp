@@ -36,7 +36,7 @@
                         <textarea name="descrizione" id="descrizione" rows="4" class="form-textarea"><%= isEdit && crociera.getDes() != null ? crociera.getDes() : "" %></textarea>
                     </div>
 
-                    <div class="riga-form">
+                    <div class="form-row">
                         <div class="form-group">
                             <label for="dataInizio">Data Inizio</label>
                             <input type="date" name="dataInizio" id="dataInizio" required value="<%= isEdit ? crociera.getDataInizio() : "" %>">
@@ -48,7 +48,7 @@
                         </div>
                     </div>
 
-                    <div class="riga-form">
+                    <div class="form-row">
                         <div class="form-group">
                             <label for="prezzo">Prezzo (€)</label>
                             <input type="number" name="prezzo" id="prezzo" step="0.01" min="0" required value="<%= isEdit ? crociera.getPrezzo() : "" %>">
@@ -77,7 +77,7 @@
 
                     <div class="form-azione riga-form-azione">
                         <a href="${pageContext.request.contextPath}/admin/crociere" class="btn btn-outline">Annulla</a>
-                        <button type="submit" class="btn btn-primary"><%= isEdit ? "Salva Modifiche" : "Crea Crociera" %></button>
+                        <button type="submit" class="btn"><%= isEdit ? "Salva Modifiche" : "Crea Crociera" %></button>
                     </div>
                 </form>
             </div>

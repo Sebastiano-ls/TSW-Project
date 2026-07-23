@@ -17,8 +17,8 @@
             <h2>Logout effettuato</h2>
             <p>Hai effettuato il logout con successo.</p>
 
-            <div class="form-azioni">
-                <a href="${pageContext.request.contextPath}/login" class="btn btn-primary">Accedi di nuovo</a>
+            <div class="form-azione">
+                <a href="${pageContext.request.contextPath}/login" class="btn">Accedi di nuovo</a>
             </div>
 
             <div class="form-footer">

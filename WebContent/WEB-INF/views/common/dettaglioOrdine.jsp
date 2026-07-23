@@ -27,7 +27,7 @@
 
   <section class="section">
     <div class="container">
-      <a href="${pageContext.request.contextPath}/ordini" class="btn btn-outline btn-sm">&larr; Torna agli ordini</a>
+      <a href="${pageContext.request.contextPath}/common/ordini" class="btn btn-outline btn-sm">&larr; Torna agli ordini</a>
 
       <% if (success != null) { %>
         <div class="alert alert-success"><%= StringEscapeUtils.escapeHtml4(success) %></div>
@@ -70,11 +70,11 @@
           </div>
           <% if (dettagli != null) {
               for (DettaglioOrdineBean d : dettagli) {
-                  double sub = d.getPrezzoArchiviato() * (d.getNumBigliettoAdulto() + d.getNumBigliettoBambino());
+                    double sub = d.getPrezzoArchiviato() * d.getNumBigliettoAdulto() + (d.getPrezzoArchiviato() * 0.5 * d.getNumBigliettoBambino());
           %>
             <div class="ordini-riga">
               <span>
-                <a href="${pageContext.request.contextPath}/ordini/archivio-crociera?idDettaglio=<%= d.getIdDettaglio() %>" class="link-archivio">
+                <a href="${pageContext.request.contextPath}/common/ordini/archivio-crociera?idDettaglio=<%= d.getIdDettaglio() %>" class="link-archivio">
                   <%= StringEscapeUtils.escapeHtml4(d.getNomeCrocieraArchiviato()) %>
                 </a>
               </span>

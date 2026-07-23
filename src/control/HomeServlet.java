@@ -59,7 +59,7 @@ public class HomeServlet extends HttpServlet {
 
         try{
             List<CrocieraBean> lastMinute = crocieraDAO.doRetrieveAllAttivi();
-            request.setAttribute("crociereLastMinute", lastMinute);
+            request.setAttribute("crociere", lastMinute);
         }catch(SQLException e){
             throw new ServletException(e);
         }

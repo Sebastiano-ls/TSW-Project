@@ -68,10 +68,10 @@
                             <p><%= utente.getEmail() %></p>
                         </div>
 
-                        <form action="${pageContext.request.contextPath}/checkout" method="post">
+                        <form action="${pageContext.request.contextPath}/common/checkout" method="post">
                             <input type="hidden" name="action" value="create">
                             <p class="checkout-conferma">Confermando l'ordine accetti i <a href="#">termini e condizioni</a> di S&S Crociere.</p>
-                            <button type="submit" class="btn btn-primary btn-block">Conferma ordine</button>
+                            <button type="submit" class="btn btn-block">Conferma ordine</button>
                         </form>
 
                         <div class="checkout-back">

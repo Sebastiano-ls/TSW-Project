@@ -66,7 +66,7 @@ public class ImageServlet extends HttpServlet{
             return;
         }
 
-        response.setContentType("image/jpg");
+        response.setContentType("image/jpeg");
         is.transferTo(response.getOutputStream());
         is.close();
     }

@@ -17,22 +17,22 @@
 
   <div class="admin-page profile-page">
     <div class="container">
-      <div class="profile-header">
+      <div class="header-profilo">
         <h1>Gestisci Tappe</h1>
         
         <p>Elenco delle tappe nel sistema.</p>
         <a href="${pageContext.request.contextPath}/admin/tappe?action=create" class="btn-admin-create">+ Nuova Tappa</a>
       </div>
 
-      <div class="profile-card wrapper-tabella">
+      <div class="profilo wrapper-tabella">
         <table class="admin-table">
           <thead>
             <tr>
-              <th class="admin-th">ID</th>
-              <th class="admin-th">Localit&agrave;</th>
-              <th class="admin-th">Porto</th>
-              <th class="admin-th">Attivo</th>
-              <th class="admin-th">Azioni</th>
+              <th>ID</th>
+              <th>Localit&agrave;</th>
+              <th>Porto</th>
+              <th>Attivo</th>
+              <th>Azioni</th>
             </tr>
           </thead>
           <tbody>
@@ -41,11 +41,11 @@
                 for (TappaBean t : tappe) { 
             %>
               <tr class='<%= rowNum++ % 2 == 0 ? "admin-tr" : "admin-tr-alt" %>'>
-                <td class="admin-td"><%= t.getId() %></td>
-                <td class="admin-td"><%= t.getLocalita() %></td>
-                <td class="admin-td"><%= t.getPorto() %></td>
-                <td class="admin-td"><%= t.isAttivo() ? "S&igrave;" : "No" %></td>
-                <td class="admin-td">
+                <td><%= t.getId() %></td>
+                <td><%= t.getLocalita() %></td>
+                <td><%= t.getPorto() %></td>
+                <td><%= t.isAttivo() ? "S&igrave;" : "No" %></td>
+                <td>
                   <a href="${pageContext.request.contextPath}/admin/tappe?action=edit&id=<%= t.getId() %>" class="btn-admin-edit">Modifica</a>
                   <form action="${pageContext.request.contextPath}/admin/tappe" method="post" class="form-inline">
                     <input type="hidden" name="action" value="delete">
@@ -60,7 +60,7 @@
             %>
             <% if (tappe == null || tappe.isEmpty()) { %>
               <tr>
-                <td colspan="5" class="admin-td stato-vuoto">Nessuna tappa presente.</td>
+                <td colspan="5" class="stato-vuoto">Nessuna tappa presente.</td>
               </tr>
             <% } %>
           </tbody>

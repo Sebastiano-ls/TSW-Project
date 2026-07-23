@@ -29,7 +29,7 @@
     <% if (ordini == null || ordini.isEmpty()) { %>
       <div class="carrello-vuoto">
         <p>nessun ordine effettuato</p>
-        <a href="${pageContext.request.contextPath}/catalogo" class="btn btn-primary">Sfoglia il catalogo</a>
+        <a href="${pageContext.request.contextPath}/catalogo" class="btn">Sfoglia il catalogo</a>
       </div>
       <% } else { %>
       <div class="ordini-tabella">
@@ -45,7 +45,7 @@
           <span>#<%= o.getIdOrdine() %></span>
           <span><%= o.getDataPagamento() %></span>
           <span><%= String.format("%.2f", o.getTotOrdine()) %> €</span>
-          <span><a href="${pageContext.request.contextPath}/ordini/dettaglio?id=<%= o.getIdOrdine() %>" class="btn btn-outline btn-sm">Dettaglio</a></span>
+          <span><a href="${pageContext.request.contextPath}/common/ordini/dettaglio?id=<%= o.getIdOrdine() %>" class="btn btn-outline btn-sm">Dettaglio</a></span>
         </div>
       <% } %>
     </div>

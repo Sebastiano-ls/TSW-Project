@@ -40,18 +40,41 @@ public class OrdineDAOImpl implements OrdineDAO {
 
     @Override
     public synchronized void doSaveConDettagli(OrdineBean ordine, List<model.DettaglioOrdineBean> dettagli) throws SQLException {
-        doSave(ordine);
-
+        String sqlOrdine = "INSERT INTO " + TABLE_NAME + " (data_pagamento, tot_ordine, ID_utente) VALUES (?, ?, ?)";
         String sqlDettaglio = "INSERT INTO dettagli_ordine (num_biglietto_adulto, num_biglietto_bambino, prezzo_archiviato, ID_ordine, ID_crociera) VALUES (?, ?, ?, ?, ?)";
-        try (Connection c = ds.getConnection();
-             PreparedStatement psD = c.prepareStatement(sqlDettaglio)) {
-            for (model.DettaglioOrdineBean d : dettagli) {
-                psD.setInt(1, d.getNumBigliettoAdulto());
-                psD.setInt(2, d.getNumBigliettoBambino());
-                psD.setDouble(3, d.getPrezzoArchiviato());
-                psD.setInt(4, ordine.getIdOrdine());
-                psD.setInt(5, d.getIdCrociera());
-                psD.executeUpdate();
+
+        try (Connection c = ds.getConnection()) {
+            c.setAutoCommit(false);
+            try {
+                try (PreparedStatement ps = c.prepareStatement(sqlOrdine, Statement.RETURN_GENERATED_KEYS)) {
+                    ps.setDate(1, ordine.getDataPagamento());
+                    ps.setDouble(2, ordine.getTotOrdine());
+                    ps.setInt(3, ordine.getIdUtente());
+                    ps.executeUpdate();
+                    try (ResultSet rs = ps.getGeneratedKeys()) {
+                        if (rs.next()) {
+                            ordine.setIdOrdine(rs.getInt(1));
+                        }
+                    }
+                }
+
+                try (PreparedStatement psD = c.prepareStatement(sqlDettaglio)) {
+                    for (model.DettaglioOrdineBean d : dettagli) {
+                        psD.setInt(1, d.getNumBigliettoAdulto());
+                        psD.setInt(2, d.getNumBigliettoBambino());
+                        psD.setDouble(3, d.getPrezzoArchiviato());
+                        psD.setInt(4, ordine.getIdOrdine());
+                        psD.setInt(5, d.getIdCrociera());
+                        psD.executeUpdate();
+                    }
+                }
+
+                c.commit();
+            } catch (SQLException e) {
+                c.rollback();
+                throw e;
+            } finally {
+                c.setAutoCommit(true);
             }
         }
     }

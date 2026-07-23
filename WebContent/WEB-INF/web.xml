@@ -15,9 +15,6 @@
             <http-only>true</http-only>
             <secure>true</secure>
         </cookie-config>
-    </session-config>
-
-    <session-config>
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 
@@ -50,7 +47,13 @@
     </security-constraint>
 
     <error-page>
-        <location>/WEB-INF/views/error.jsp</location> <!-- Sostituisci con il percorso reale della tua pagina d'errore -->
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/error.jsp</location>
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/error.jsp</location>
     </error-page>
 
     <error-page>

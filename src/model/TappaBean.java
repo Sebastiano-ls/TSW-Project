@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class TappaBean implements Serializable{
     private static final long serialVersionUID = 1L;
     
-    int id;
-    String localita;
-    String porto;
-    boolean attivo;
+    private int id;
+    private String localita;
+    private String porto;
+    private boolean attivo;
 
     public TappaBean(){}
 

@@ -25,7 +25,7 @@
 <% } %>
 
             <form action="${pageContext.request.contextPath}/register" method="post" onsubmit="return validateRegisterForm()">
-                <div class="riga-form">
+                <div class="form-row">
                     <div class="form-group">
                         <label for="nome">Nome</label>
                         <input type="text" name="nome" id="nome" placeholder="Il tuo nome" required>
@@ -42,7 +42,7 @@
                     <input type="email" name="email" id="email" placeholder="la tua email" required>
                 </div>
 
-                <div class="riga-form">
+                <div class="form-row">
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" name="password" id="password" placeholder="•••••••••••••••" required>
@@ -59,7 +59,7 @@
                     </div>
                 </div>
 
-                <div class="riga-form">
+                <div class="form-row">
                     <div class="form-group">
                         <label for="dataNascita">Data di Nascita</label>
                         <input type="date" name="dataNascita" id="dataNascita">
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="form-azione">
-                    <button type="submit" class="btn btn-primary">Registrati</button>
+                    <button type="submit" class="btn">Registrati</button>
                 </div>
 
                 <div class="form-footer">

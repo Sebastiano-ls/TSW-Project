@@ -42,31 +42,25 @@ public class RicercaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String action = request.getParameter("ricercaAction");
-        if("ricerca".equalsIgnoreCase(action)){
-            //PRENDO I PARAMETRI DEL FORM DALLA RICHIESTA
-            String des = request.getParameter("des");
-            String par = request.getParameter("par");
-            Date data = Date.valueOf(LocalDate.parse(request.getParameter("data")));
-            
-            des = (!des.trim().isEmpty()) ? StringEscapeUtils.escapeHtml4(des.trim()) : null;
-            par = (!par.trim().isEmpty()) ? StringEscapeUtils.escapeHtml4(par.trim()) : null;
-            data = (!request.getParameter("data").equals(null) && !request.getParameter("data").equals("")) ? Date.valueOf(LocalDate.parse(request.getParameter("data"))) : null;
-            
-            //CHIAMO IL DAO
-            try{
-                List<CrocieraBean> risultati = crocieraDAO.doRetrieveByParams(des, par, data);
-                request.setAttribute("crociere", risultati);
-            } catch (SQLException e) {
-                throw new ServletException(e);
+        String des = request.getParameter("destinazione");
+        String dataParam = request.getParameter("data");
+        String par = request.getParameter("durata");
+        Date data = null;
+
+        try{
+            if (des != null || dataParam != null || par != null) {
+                des = (des != null && !des.trim().isEmpty()) ? StringEscapeUtils.escapeHtml4(des.trim()) : null;
+                if (dataParam != null && !dataParam.trim().isEmpty()) {
+                    data = Date.valueOf(LocalDate.parse(dataParam));
+                }
+                request.setAttribute("crociere", crocieraDAO.doRetrieveByParams(des, null, data));
+            } else if("prezzi_bassi".equalsIgnoreCase(request.getParameter("ricercaAction"))){
+                request.setAttribute("crociere", crocieraDAO.doRetrieveByPrezziBassi());
+            } else {
+                request.setAttribute("crociere", crocieraDAO.doRetrieveAllAttivi());
             }
-        }else if("prezzi_bassi".equalsIgnoreCase(action)){
-            try{
-                List<CrocieraBean> risultati = crocieraDAO.doRetrieveByPrezziBassi();
-                request.setAttribute("crociere", risultati);
-            } catch (SQLException e){
-                throw new ServletException(e);
-            }
+        } catch (SQLException e) {
+            throw new ServletException(e);
         }
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/views/risultati.jsp");
