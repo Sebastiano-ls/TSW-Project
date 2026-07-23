@@ -51,8 +51,7 @@
                     <div class="carrello-intestazione">
                         <span>prodotto</span>
                         <span>prezzo</span>
-                        <span>adulti</span>
-                        <span>bambini</span>
+                        <span>passeggeri</span>
                         <span>subtotale</span>
                         <span></span>
                     </div>
@@ -70,20 +69,12 @@
                         <span><%= String.format("%.2f", item.getPrezzoApplicato()) %> €</span>
 
                         <span>
-                            <p id="alert-error">
-                            <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form">
+                            <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form" ajax-quantita>
                                 <input type="hidden" name="action" value="updateQuantita">
                                 <input type="hidden" name="index" value="<%= i %>">
-                                <input type="number" name="adulti" value="<%= item.getNumBiglAdu() %>" min="0" max="20" class="carrello-quantita-input" ajax-quantita>
-                            </form>
-                        </span>
-
-                        <p id="alert-error">
-                        <span>
-                            <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form">
-                                <input type="hidden" name="action" value="updateQuantita">
-                                <input type="hidden" name="index" value="<%= i %>">
-                                <input type="number" name="bambini" value="<%= item.getNumBiglChilds() %>" min="0" max="10" class="carrello-quantita-input" ajax-quantita>
+                                <p class="alert-error"></p>
+                                <input type="number" name="adulti" value="<%= item.getNumBiglAdu() %>" min="0" max="20" class="carrello-quantita-input">
+                                <input type="number" name="bambini" value="<%= item.getNumBiglChilds() %>" min="0" max="10" class="carrello-quantita-input">
                             </form>
                         </span>
 

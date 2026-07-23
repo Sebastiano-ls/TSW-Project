@@ -88,6 +88,7 @@ public class CarrelloServlet extends HttpServlet{
                 String xhr = request.getHeader("X-Requested-With");
                 if ("XMLHttpRequest".equals(xhr)) {
                     response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
                     response.getWriter().write("{\"ok\":true,\"totale\":" + carrello.size() + "}"); //imposta esito dell'operzione di add asincrona e numero di elem. nel carrello
                     return;
                 }
@@ -131,6 +132,7 @@ public class CarrelloServlet extends HttpServlet{
                 String xhr = request.getHeader("X-Requested-With");
                 if ("XMLHttpRequest".equals(xhr)) {
                     response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
                     response.getWriter().write("{\"ok\":true}");
                     return;
                 }

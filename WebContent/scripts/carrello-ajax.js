@@ -1,14 +1,6 @@
-function ajaxUpdateQuantita(input) {
-    let form = input;
-    while (form && form.tagName !== "FORM") {
-        form = form.parentElement;
-    }
-    
-    if (!form) 
-        return;
-
+function ajaxUpdateQuantita(form) {
     let xhr = createXMLHttpRequest();
-    if(!xhr)
+    if (!xhr)
         return;
 
     let url = form.action || window.location.href;
@@ -17,20 +9,26 @@ function ajaxUpdateQuantita(input) {
 
     xhr.onreadystatechange = function(){
         if(this.readyState == 4){
+            let alertElem = document.querySelector(".alert-error");
             if(this.status == 0){
-                let alertElem = document.getElementById("alert-error");
-                if (alertElem) alertElem.innerHTML = "Problemi nell'esecuzione della richiesta: nessuna risposta ricevuta nel tempo limite";
-            }else if(this.status != 200){ 
-                let alertElem = document.getElementById("alert-error");
-                if (alertElem) alertElem.innerHTML = "Problemi nell'esecuzione della richiesta:\n" + this.statusText;
+                if (alertElem) alertElem.textContent = "Problemi nell'esecuzione della richiesta: nessuna risposta ricevuta nel tempo limite";
+            }else if(this.status != 200){
+                if (alertElem) alertElem.textContent = "Problemi nell'esecuzione della richiesta:\n" + this.statusText;
             }else{
-                let alertElem = document.getElementById("alert-error");
-                if (alertElem) alertElem.innerHTML = "";
+                if (alertElem) alertElem.textContent = "";
+                try {
+                    let resp = JSON.parse(this.responseText);
+                    if (resp.ok && resp.totale !== undefined) {
+                        let totaleElem = document.querySelector(".carrello-totale-valore");
+                        if (totaleElem) totaleElem.textContent = "€ " + resp.totale;
+                    }
+                } catch(e) { /* JSON parse error */ }
             }
         }
     };
 
     xhr.open(method, url, true);
+    xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
 
     setTimeout(function(){
         if(xhr.readyState < 4){
@@ -41,17 +39,18 @@ function ajaxUpdateQuantita(input) {
     xhr.send(formData);
 }
 
-window.onload = function() {
-    var quantitaInputs = document.querySelectorAll("[ajax-quantita]");
-
-    for (let i = 0; i < quantitaInputs.length; i++) {
-        quantitaInputs[i].onchange = function() { ajaxUpdateQuantita(this); };
+window.addEventListener('load', function() {
+    var cartForms = document.querySelectorAll("[ajax-quantita]");
+    for (let i = 0; i < cartForms.length; i++) {
+        var inputs = cartForms[i].querySelectorAll("input[type='number']");
+        for (let j = 0; j < inputs.length; j++) {
+            inputs[j].onchange = function() { ajaxUpdateQuantita(cartForms[i]); };
+        }
     }
-};
+});
 
 function createXMLHttpRequest(){
     var request;
-
     try{
         request = new XMLHttpRequest();
     }catch (e){
@@ -61,11 +60,10 @@ function createXMLHttpRequest(){
             try{
                 request = new ActiveXObject("Microsoft.XMLHTTP");
             }catch(e){
-                let alertElem = document.getElementById("alert-error");
-                if (alertElem) alertElem.innerHTML = "Il tuo browser non supporta questa funzione";
+                let alertElem = document.querySelector(".alert-error");
+                if (alertElem) alertElem.textContent = "Il tuo browser non supporta questa funzione";
             }
         }
     }
-
     return request;
 }
