@@ -70,18 +70,20 @@
                         <span class="carrello-col-prezzo"><%= String.format("%.2f", item.getPrezzoApplicato()) %> €</span>
 
                         <span class="carrello-col-adulti">
+                            <p id="alert-error">
                             <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form">
                                 <input type="hidden" name="action" value="updateQuantita">
                                 <input type="hidden" name="index" value="<%= i %>">
-                                <input type="number" name="adulti" value="<%= item.getNumBiglAdu() %>" min="0" max="20" class="carrello-quantita-input" data-ajax-qty>
+                                <input type="number" name="adulti" value="<%= item.getNumBiglAdu() %>" min="0" max="20" class="carrello-quantita-input" ajax-quantita>
                             </form>
                         </span>
 
+                        <p id="alert-error">
                         <span class="carrello-col-bambini">
                             <form action="${pageContext.request.contextPath}/carrello" method="post" class="carrello-quantita-form">
                                 <input type="hidden" name="action" value="updateQuantita">
                                 <input type="hidden" name="index" value="<%= i %>">
-                                <input type="number" name="bambini" value="<%= item.getNumBiglChilds() %>" min="0" max="10" class="carrello-quantita-input" data-ajax-qty>
+                                <input type="number" name="bambini" value="<%= item.getNumBiglChilds() %>" min="0" max="10" class="carrello-quantita-input" ajax-quantita>
                             </form>
                         </span>
 
