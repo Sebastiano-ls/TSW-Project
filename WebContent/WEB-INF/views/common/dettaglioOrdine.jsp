@@ -51,7 +51,7 @@
             <span class="label-profilo">email</span>
             <span class="profile-value"><%= StringEscapeUtils.escapeHtml4(ordine.getEmailUtente()) %></span>
           </div>
-          <div class="profile-row">
+          <div class="riga-profilo">
             <span class="label-profilo">totale</span>
             <span class="profile-value"><%= String.format("%.2f", ordine.getTotOrdine()) %> €</span>
           </div>

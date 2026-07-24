@@ -41,7 +41,7 @@ public class OrdineDAOImpl implements OrdineDAO {
     @Override
     public synchronized void doSaveConDettagli(OrdineBean ordine, List<model.DettaglioOrdineBean> dettagli) throws SQLException {
         String sqlOrdine = "INSERT INTO " + TABLE_NAME + " (data_pagamento, tot_ordine, ID_utente) VALUES (?, ?, ?)";
-        String sqlDettaglio = "INSERT INTO dettagli_ordine (num_biglietto_adulto, num_biglietto_bambino, prezzo_archiviato, ID_ordine, ID_crociera) VALUES (?, ?, ?, ?, ?)";
+        String sqlDettaglio = "INSERT INTO dettagli_ordine (num_biglietto_adulto, num_biglietto_bambino, prezzo_archiviato, ID_ordine, ID_crociera, nome_crociera_archiviato, descrizione_archiviato, data_inizio_archiviato, data_fine_archiviato) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection c = ds.getConnection()) {
             c.setAutoCommit(false);
@@ -65,6 +65,10 @@ public class OrdineDAOImpl implements OrdineDAO {
                         psD.setDouble(3, d.getPrezzoArchiviato());
                         psD.setInt(4, ordine.getIdOrdine());
                         psD.setInt(5, d.getIdCrociera());
+                        psD.setString(6, d.getNomeCrocieraArchiviato());
+                        psD.setString(7, d.getDescrizioneArchiviato());
+                        psD.setDate(8, d.getDataInizioArchiviato());
+                        psD.setDate(9, d.getDataFineArchiviato());
                         psD.executeUpdate();
                     }
                 }
